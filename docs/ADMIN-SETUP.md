@@ -1,44 +1,72 @@
-# Admin panel setup (one time)
+# Setup: putting the site and admin portal live
 
-The admin panel at `/admin` is [Sveltia CMS](https://github.com/sveltia/sveltia-cms). There is no database: every save in the panel commits a JSON file to the `main` branch of this repo, and Netlify rebuilds the site (about 1 minute).
+Same setup as the SunMoonRisingYoga portal. You need **GitHub** (you have it), **Netlify**, and a **Google Cloud** project for sign-in. All free, no card. About 30 minutes, once.
 
-## 1. Put the site on Netlify
+How it works: the owner signs in at `/admin` with Google. Only emails in `ADMIN_EMAILS` get in. When she taps **Guardar y publicar**, a Netlify function commits `src/data/catalog.json` to GitHub using a token only the server sees, and Netlify rebuilds the site (1–2 minutes). **Nobody needs a GitHub account except you.**
 
-1. Merge this work into `main` (the CMS reads and writes `main`).
-2. In Netlify: **Add new site → Import an existing project → GitHub →** `maldonadocintia-code/Dipa-website`.
-3. Build settings come from `netlify.toml` (`npm run build`, publish `dist`). Deploy.
-4. Note the site URL (for example `https://dipa.netlify.app`). If it differs, update `site` in `astro.config.mjs` and `site_url` / `display_url` in `public/admin/config.yml`.
+---
 
-## 2. Let the admin log in with GitHub
+## 1. Merge into `main`
 
-Netlify handles the GitHub login for the CMS.
+The portal saves to the branch in `GITHUB_BRANCH` (step 5), and Netlify publishes `main`. Merge this work into `main` first.
 
-1. In GitHub: **Settings → Developer settings → OAuth Apps → New OAuth App.**
-   - Application name: `DIPA admin`
-   - Homepage URL: the Netlify site URL
-   - Authorization callback URL: `https://api.netlify.com/auth/done`
-2. Create a client secret. Copy the Client ID and the secret.
-3. In Netlify, on this site: **Site configuration → Access & security → OAuth → Install provider → GitHub**, then paste the Client ID and secret.
+## 2. Connect Netlify
 
-The menu names in Netlify and GitHub change from time to time; search their docs for "OAuth provider" if a step doesn't match.
+1. **netlify.com** → **Add new site** → **Import an existing project** → **GitHub** → `Dipa-website`.
+2. Build settings come from `netlify.toml` (`npm run build`, publish `dist`, functions `netlify/functions`). **Deploy**.
+3. Note the URL, for example `https://dipa.netlify.app`.
 
-## 3. Give the owner access
+The public site works now. The portal won't let anyone in until steps 3–5 are done.
 
-1. The owner creates a free GitHub account.
-2. In this repo: **Settings → Collaborators → Add people** → her username, with **Write** access.
-3. She opens `https://<site>/admin`, clicks **Sign In with GitHub**, and accepts.
+## 3. Google sign-in
 
-Fallback if the OAuth login gives trouble: the login screen also offers **Sign In Using Access Token** (a fine-grained GitHub token with *Contents: read and write* on this repo only).
+1. **console.cloud.google.com** → create a project called `DIPA`.
+2. Search **Google Auth Platform** → **Get started**.
+   - App name: `DIPA Admin`; support email: yours.
+   - Audience: **External**.
+   - **Test users**: add **your email and the owner's**. While the app is unpublished, only listed test users can sign in. Skip this and Google blocks her before our allowlist even sees her.
+3. **Clients** → **Create client** → **Web application**, name `Admin portal`.
+   - **Authorised JavaScript origins**: the Netlify URL (e.g. `https://dipa.netlify.app`). Add the custom domain too when there is one.
+4. Copy the **Client ID** (ends in `.apps.googleusercontent.com`).
 
-## 4. Check it works
+The owner's email must be a Google account. A Gmail address already is one; any other address can be turned into a Google account at accounts.google.com ("use my current email address instead").
 
-- In /admin, edit a product's short description and save.
-- A commit `CMS: editar products "…"` appears on `main`.
-- About a minute later the change is live.
+## 4. GitHub token (lets the portal save)
+
+1. GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**.
+2. Name `dipa-admin`. Expiry: up to a year. **Put a reminder in your calendar**: when it expires, saving stops working until you make a new one and update `GITHUB_TOKEN`.
+3. **Repository access** → *Only select repositories* → `Dipa-website`.
+4. **Repository permissions** → **Contents: Read and write**. Nothing else.
+5. Generate and copy it (`github_pat_…`).
+
+## 5. Netlify environment variables
+
+Netlify → the site → **Site configuration** → **Environment variables**:
+
+| Key | Value |
+|---|---|
+| `GOOGLE_CLIENT_ID` | Client ID from step 3 |
+| `ADMIN_EMAILS` | `you@gmail.com,owner@example.com` (comma-separated) |
+| `GITHUB_TOKEN` | token from step 4 (mark as secret) |
+| `GITHUB_REPO` | `maldonadocintia-code/Dipa-website` |
+| `GITHUB_BRANCH` | `main` |
+
+Then **Deploys** → **Trigger deploy** so the functions pick them up.
+
+To add or remove an editor later: change `ADMIN_EMAILS` (and the Google test users list), then redeploy.
+
+## 6. Check it works
+
+1. Open `https://<site>/admin`, sign in with Google.
+2. Edit a product's short description → **Guardar y publicar**.
+3. A commit "Actualizar catálogo (panel de administración — your email)" appears on `main`; the site updates 1–2 minutes later.
+4. Sign in with an email that's *not* in `ADMIN_EMAILS`: it must say it has no permission.
+
+---
 
 ## Notes
 
-- **Deleting a category** hides all its products from the site (their files stay). Prefer the "Ocultar del sitio" switch.
-- **Photos** go to `public/uploads/`. Ask the owner to upload photos under ~1 MB (phone photos are often 3–5 MB; WhatsApp-compressed copies are fine).
-- **Fixed pages** (Inicio, Cómo comprar, Nosotros, Contacto) are not in the admin. Cómo comprar holds her legal wording and is deliberately kept out of reach of accidental edits.
-- The CMS script is pinned in `public/admin/index.html`. To update it, change the version number there.
+- **What the portal edits:** products, categories and shop details (WhatsApp, Instagram, hours, address). All in `src/data/catalog.json`. The fixed pages (Inicio, Cómo comprar, Nosotros, Contacto) are not in the portal; Cómo comprar holds her legal wording.
+- **Photos** are resized in the browser (max 1600 px, JPEG) and committed to `public/uploads/`. Each photo upload is its own commit and triggers a rebuild; Netlify's free plan has plenty of build minutes for this.
+- **Safety:** every save is validated (`lib/catalog-schema.mjs`) before it's committed, so a save can't break the build. If two people edit at once, the second save is refused rather than overwriting the first. Every change is a git commit, so anything can be rolled back.
+- **Local testing of the portal** needs the Netlify CLI (`npx netlify dev`) with the same environment variables in a local `.env`, plus `http://localhost:8888` in the Google client's JavaScript origins.

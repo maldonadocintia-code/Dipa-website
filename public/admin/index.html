@@ -3,11 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex" />
-  <title>Administrar catálogo · DIPA</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel de DIPA</title>
+  <link rel="icon" href="/logo/dipa-logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:opsz,wght@9..144,600&display=swap" />
+  <link rel="stylesheet" href="/admin/admin.css" />
 </head>
 <body>
-  <!-- Sveltia CMS (Decap-compatible). Config: ./config.yml -->
-  <script src="https://unpkg.com/@sveltia/cms@0.248.1/dist/sveltia-cms.js"></script>
+  <header class="top">
+    <img src="/logo/dipa-logo.svg" alt="DIPA Gráfica" height="40" />
+    <span class="top-title">Panel</span>
+    <span class="top-user" id="user"></span>
+    <button type="button" class="link" id="signout" hidden>Salir</button>
+  </header>
+
+  <main id="app">
+    <section class="card login" id="login">
+      <h1>Panel de DIPA</h1>
+      <p>Iniciá sesión con tu cuenta de Google para cargar y editar productos.</p>
+      <div id="gsi"></div>
+      <p class="msg" id="login-msg" role="status"></p>
+    </section>
+  </main>
+
+  <div class="savebar" id="savebar" hidden>
+    <span id="save-status" role="status">Sin cambios</span>
+    <a class="link" href="/" target="_blank" rel="noopener">Ver la web</a>
+    <button type="button" class="btn btn-primary" id="save" disabled>Guardar y publicar</button>
+  </div>
+
+  <script src="/admin/admin.js"></script>
 </body>
 </html>

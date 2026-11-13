@@ -1,0 +1,501 @@
+{
+  "site": {
+    "whatsappNumber": "5491132424474",
+    "whatsappDisplay": "11 3242-4474",
+    "instagramUser": "disypapel",
+    "hours": "Lunes a viernes de 9 a 18",
+    "area": "Pablo Podestá, Buenos Aires",
+    "address": "[DIRECCIÓN DEL LOCAL]",
+    "footerTagline": "Papelería personalizada e impresiones en Pablo Podestá.",
+    "copyright": "© 2026 DIPA · Diseño y Papel"
+  },
+  "categories": [
+    {
+      "id": "escolares",
+      "title": "Escolares",
+      "hidden": false,
+      "summary": "Etiquetas con nombre y grado, planners, horarios con imán y sellos.",
+      "photoLabel": "Foto: etiquetas y planner escolar"
+    },
+    {
+      "id": "agendas-y-cuadernos",
+      "title": "Agendas y cuadernos",
+      "hidden": false,
+      "summary": "Agendas emprendedora, estudiantil y docente, y cuadernos personalizados.",
+      "photoLabel": "Foto: agendas y cuadernos artesanales"
+    },
+    {
+      "id": "para-emprendimientos",
+      "title": "Para emprendimientos",
+      "hidden": false,
+      "summary": "Tarjetas personales, stickers con logo, folletos, tags y sellos.",
+      "kicker": "Para tu marca",
+      "intro": "Tarjetería, stickers, folletos y sellos con tu logo, para que tu emprendimiento se vea profesional en cada detalle.",
+      "photoLabel": "Foto: tarjetas y stickers con logo",
+      "combo": {
+        "title": "¿Armamos un combo para tu marca?",
+        "text": "Contanos qué necesitás y te pasamos el presupuesto por WhatsApp.",
+        "message": "Hola DIPA! Quiero consultar por productos para mi emprendimiento"
+      }
+    },
+    {
+      "id": "cumples",
+      "title": "Cumples",
+      "hidden": false,
+      "summary": "Invitaciones, toppers, banderines, souvenirs y deco para fotos.",
+      "photoLabel": "Foto: toppers y banderines de cumple"
+    },
+    {
+      "id": "fechas-especiales",
+      "title": "Fechas especiales",
+      "hidden": false,
+      "summary": "Día de la Madre, del Padre, del Niño y del Amigo, Pascuas, Navidad y comuniones.",
+      "photoLabel": "Foto: regalos para fechas especiales"
+    },
+    {
+      "id": "calendarios",
+      "title": "Calendarios",
+      "hidden": false,
+      "summary": "Nuestros modelos habituales. Consultá por los disponibles.",
+      "photoLabel": "Foto: calendarios"
+    },
+    {
+      "id": "carteleria",
+      "title": "Cartelería",
+      "hidden": false,
+      "summary": "Vinilo para vidriera, lonas y cartel tipo bandera.",
+      "note": "No incluye colocación",
+      "photoLabel": "Foto: vinilo en vidriera"
+    },
+    {
+      "id": "impresiones-full-color",
+      "title": "Impresiones full color",
+      "hidden": false,
+      "summary": "Imprimimos tus archivos en distintos papeles y tamaños.",
+      "intro": "Solo impresión, tal como envíes el archivo.",
+      "note": "Solo impresión",
+      "photoLabel": "Foto: impresiones full color",
+      "papers": [
+        "[PAPEL 1]",
+        "[PAPEL 2]",
+        "[PAPEL 3]",
+        "[PAPEL 4]"
+      ],
+      "sizes": [
+        "[TAMAÑO 1]",
+        "[TAMAÑO 2]",
+        "[TAMAÑO 3]",
+        "[TAMAÑO 4]"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "etiquetas-personalizadas-con-nombre-y-grado",
+      "title": "Etiquetas personalizadas con nombre y grado",
+      "category": "escolares",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: etiquetas personalizadas con nombre y grado"
+    },
+    {
+      "id": "asignaturas-personalizadas",
+      "title": "Asignaturas personalizadas",
+      "category": "escolares",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: asignaturas personalizadas"
+    },
+    {
+      "id": "planner-semanal",
+      "title": "Planner semanal",
+      "category": "escolares",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: planner semanal"
+    },
+    {
+      "id": "horarios-con-iman",
+      "title": "Horarios con imán",
+      "category": "escolares",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: horarios con imán"
+    },
+    {
+      "id": "pizarra-blanca-borrable",
+      "title": "Pizarra blanca borrable",
+      "category": "escolares",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: pizarra blanca borrable"
+    },
+    {
+      "id": "sello-para-cuaderno-o-carpeta",
+      "title": "Sello para cuaderno o carpeta",
+      "category": "escolares",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: sello para cuaderno o carpeta"
+    },
+    {
+      "id": "agenda-emprendedora",
+      "title": "Agenda emprendedora",
+      "category": "agendas-y-cuadernos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: agenda emprendedora"
+    },
+    {
+      "id": "agenda-estudiantil",
+      "title": "Agenda estudiantil",
+      "category": "agendas-y-cuadernos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: agenda estudiantil"
+    },
+    {
+      "id": "agenda-docente",
+      "title": "Agenda docente",
+      "category": "agendas-y-cuadernos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: agenda docente"
+    },
+    {
+      "id": "cuadernos-artesanales-personalizados",
+      "title": "Cuadernos artesanales personalizados",
+      "category": "agendas-y-cuadernos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: cuadernos artesanales personalizados"
+    },
+    {
+      "id": "cuaderno-pediatrico",
+      "title": "Cuaderno pediátrico",
+      "category": "agendas-y-cuadernos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: cuaderno pediátrico"
+    },
+    {
+      "id": "cuaderno-de-recetas",
+      "title": "Cuaderno de recetas",
+      "category": "agendas-y-cuadernos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: cuaderno de recetas"
+    },
+    {
+      "id": "tarjetas-personales",
+      "title": "Tarjetas personales",
+      "category": "para-emprendimientos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "summary": "Con tu logo y tus datos de contacto.",
+      "photoLabel": "Foto: tarjetas personales"
+    },
+    {
+      "id": "stickers-con-logo",
+      "title": "Stickers con logo",
+      "category": "para-emprendimientos",
+      "hidden": false,
+      "featured": true,
+      "hasPage": true,
+      "summary": "Para cerrar bolsas, decorar tu packaging o sumar a cada pedido.",
+      "photoLabel": "Foto: stickers con logo",
+      "badge": "Para emprendimientos",
+      "description": "Stickers personalizados con el logo de tu emprendimiento. Ideales para cerrar bolsas, decorar tu packaging o sumar a cada pedido.",
+      "options": [
+        {
+          "label": "Forma",
+          "value": "[OPCIONES DE FORMA]"
+        },
+        {
+          "label": "Tamaños",
+          "value": "[TAMAÑOS DISPONIBLES]"
+        },
+        {
+          "label": "Material",
+          "value": "[TIPO DE PAPEL O VINILO]"
+        },
+        {
+          "label": "Cantidad mínima",
+          "value": "[CANTIDAD MÍNIMA]"
+        },
+        {
+          "label": "Tu logo",
+          "value": "Envianos el archivo de tu logo por WhatsApp."
+        },
+        {
+          "label": "Plazo de entrega",
+          "value": "Aproximadamente 5 días hábiles."
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Foto 1: stickers con logo (principal)"
+        },
+        {
+          "label": "Foto 2: stickers en packaging"
+        },
+        {
+          "label": "Foto 3: plancha de stickers"
+        },
+        {
+          "label": "Foto 4: stickers en bolsas"
+        }
+      ],
+      "related": [
+        "tarjetas-personales",
+        "tags"
+      ]
+    },
+    {
+      "id": "tarjeteria-para-packaging",
+      "title": "Tarjetería para packaging",
+      "category": "para-emprendimientos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "summary": "Tarjetas con tu diseño para acompañar cada pedido.",
+      "photoLabel": "Foto: tarjetería para packaging",
+      "whatsappName": "tarjeteria para packaging"
+    },
+    {
+      "id": "tags",
+      "title": "Tags",
+      "category": "para-emprendimientos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "summary": "Etiquetas colgantes para tus productos y regalos.",
+      "photoLabel": "Foto: tags colgantes"
+    },
+    {
+      "id": "folletos",
+      "title": "Folletos",
+      "category": "para-emprendimientos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "summary": "Para dar a conocer tu emprendimiento, promos y novedades.",
+      "photoLabel": "Foto: folletos"
+    },
+    {
+      "id": "cuaderno-de-pedidos-personalizado",
+      "title": "Cuaderno de pedidos personalizado",
+      "category": "para-emprendimientos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "summary": "Para anotar pedidos y clientes, con el nombre de tu marca.",
+      "photoLabel": "Foto: cuaderno de pedidos",
+      "whatsappName": "el cuaderno de pedidos"
+    },
+    {
+      "id": "talonario-de-presupuestos",
+      "title": "Talonario de presupuestos",
+      "category": "para-emprendimientos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "summary": "Con tu logo y tus datos, listo para completar.",
+      "photoLabel": "Foto: talonario de presupuestos",
+      "whatsappName": "talonarios de presupuesto"
+    },
+    {
+      "id": "sellos-personalizados-de-madera",
+      "title": "Sellos personalizados de madera",
+      "category": "para-emprendimientos",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "summary": "Con tu logo, para bolsas, packaging y tarjetas.",
+      "photoLabel": "Foto: sello de madera con logo",
+      "whatsappName": "sellos de madera"
+    },
+    {
+      "id": "invitacion-digital",
+      "title": "Invitación digital",
+      "category": "cumples",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: invitación digital"
+    },
+    {
+      "id": "tarjeta-de-souvenir",
+      "title": "Tarjeta de souvenir",
+      "category": "cumples",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: tarjeta de souvenir"
+    },
+    {
+      "id": "souvenir-pizarra-borrable-con-actividades-y-fibron",
+      "title": "Souvenir: pizarra borrable con actividades y fibrón",
+      "category": "cumples",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: souvenir: pizarra borrable con actividades y fibrón"
+    },
+    {
+      "id": "toppers",
+      "title": "Toppers",
+      "category": "cumples",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: toppers"
+    },
+    {
+      "id": "deco-para-cortina-de-fondo-de-fotos",
+      "title": "Deco para cortina de fondo de fotos",
+      "category": "cumples",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: deco para cortina de fondo de fotos"
+    },
+    {
+      "id": "banderines",
+      "title": "Banderines",
+      "category": "cumples",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: banderines"
+    },
+    {
+      "id": "dia-de-la-madre",
+      "title": "Día de la Madre",
+      "category": "fechas-especiales",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: día de la madre",
+      "whatsappName": "productos para el Día de la Madre"
+    },
+    {
+      "id": "dia-del-padre",
+      "title": "Día del Padre",
+      "category": "fechas-especiales",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: día del padre",
+      "whatsappName": "productos para el Día del Padre"
+    },
+    {
+      "id": "dia-del-nino",
+      "title": "Día del Niño",
+      "category": "fechas-especiales",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: día del niño",
+      "whatsappName": "productos para el Día del Niño"
+    },
+    {
+      "id": "dia-del-amigo",
+      "title": "Día del Amigo",
+      "category": "fechas-especiales",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: día del amigo",
+      "whatsappName": "productos para el Día del Amigo"
+    },
+    {
+      "id": "pascuas",
+      "title": "Pascuas",
+      "category": "fechas-especiales",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: pascuas",
+      "whatsappName": "productos para Pascuas"
+    },
+    {
+      "id": "navidad",
+      "title": "Navidad",
+      "category": "fechas-especiales",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: navidad",
+      "whatsappName": "productos para Navidad"
+    },
+    {
+      "id": "comuniones",
+      "title": "Comuniones",
+      "category": "fechas-especiales",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: comuniones",
+      "whatsappName": "productos para comuniones"
+    },
+    {
+      "id": "calendarios",
+      "title": "Calendarios",
+      "category": "calendarios",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: calendarios"
+    },
+    {
+      "id": "vinilo-para-vidriera",
+      "title": "Vinilo para vidriera",
+      "category": "carteleria",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: vinilo para vidriera"
+    },
+    {
+      "id": "lonas",
+      "title": "Lonas",
+      "category": "carteleria",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: lonas"
+    },
+    {
+      "id": "cartel-tipo-bandera",
+      "title": "Cartel tipo bandera",
+      "category": "carteleria",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: cartel tipo bandera"
+    },
+    {
+      "id": "impresiones-full-color",
+      "title": "Impresiones full color",
+      "category": "impresiones-full-color",
+      "hidden": false,
+      "featured": false,
+      "hasPage": false,
+      "photoLabel": "Foto: impresiones full color"
+    }
+  ]
+}

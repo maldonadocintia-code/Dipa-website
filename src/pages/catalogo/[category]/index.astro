@@ -5,13 +5,11 @@ import CtaBand from '../../../components/CtaBand.astro';
 import { getCategories, getProducts } from '../../../lib/catalog';
 import { MSG_GENERAL } from '../../../lib/site';
 
-export async function getStaticPaths() {
-  const cats = await getCategories();
-  return cats.map((category) => ({ params: { category: category.id }, props: { category } }));
+export function getStaticPaths() {
+  return getCategories().map((c) => ({ params: { category: c.id }, props: { c } }));
 }
-const { category } = Astro.props;
-const c = category.data;
-const products = await getProducts(category.id);
+const { c } = Astro.props;
+const products = getProducts(c.id);
 const intro = c.intro || c.summary;
 ---
 <Base title={`${c.title} · Catálogo · DIPA`} current="catalogo" description={intro}>

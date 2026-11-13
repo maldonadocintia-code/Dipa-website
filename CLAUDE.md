@@ -16,5 +16,6 @@ Read `HANDOVER.md` in full before writing any code. It is the spec; `design/` ho
 
 ## Decisions made (13 Nov 2026)
 
-- Stack: Astro (static) + Sveltia CMS at `/admin` (git-based, edits JSON in `src/content/` and `src/data/site.json`) + Netlify. See `README.md` and `docs/ADMIN-SETUP.md`.
-- Categories and products are data. When adding a field, update both `src/content.config.ts` and `public/admin/config.yml`.
+- Stack: Astro (static) + Netlify. See `README.md` and `docs/ADMIN-SETUP.md`.
+- Admin portal at `/admin`: Google sign-in checked against `ADMIN_EMAILS`, Netlify Functions commit `src/data/catalog.json` to GitHub (same pattern as the SunMoonRisingYoga site). No editor needs a GitHub account.
+- All catalogue data lives in `src/data/catalog.json`. When adding a field, update `lib/catalog-schema.mjs`, the `Catalog` types in `src/lib/catalog.ts`, and the editor in `public/admin/admin.js`. Run `npm test`.

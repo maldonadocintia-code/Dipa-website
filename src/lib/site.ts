@@ -1,6 +1,6 @@
-import site from '../data/site.json';
+import { catalog } from './catalog';
 
-export { site };
+export const site = catalog.site;
 
 export const MSG_GENERAL = 'Hola DIPA! Quiero hacer una consulta';
 
