@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>DIPA · Inicio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;display=swap">
+<style>
+/* ===== TOKENS DIPA: colores y tipografías (cambiar acá) ===== */
+:root{
+--c-terracotta:#A44B3F;--c-peach:#F09C78;--c-sage:#CBDFBC;--c-cream:#F7F4D3;--c-lightgreen:#D5E09C;
+--c-mutedsage:#9AAE88;--c-olive:#5E6B4F;--c-burnt:#E39260;--c-brown:#4F2C1D;--c-paper:#FFFDF4;
+--f-display:'Fraunces',Georgia,serif;--f-body:'DM Sans',system-ui,sans-serif;--f-hand:'Caveat',cursive;
+--r-sm:12px;--r-md:20px;--r-lg:32px;--r-pill:999px;
+}
+body{margin:0;background:var(--c-cream);color:var(--c-brown);font-family:var(--f-body);font-size:16px;line-height:1.5}
+a{color:var(--c-terracotta)}a:hover{color:var(--c-brown)}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.15;font-weight:600}
+p{margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;border-radius:var(--r-pill);font-weight:700;font-size:16px;text-decoration:none;box-sizing:border-box;border:0;cursor:pointer;font-family:var(--f-body)}
+.btn-primary{background:var(--c-terracotta);color:#fff}.btn-primary:hover{background:var(--c-brown);color:#fff}
+.btn-secondary{background:var(--c-olive);color:#fff}.btn-secondary:hover{background:var(--c-brown);color:#fff}
+.btn-ghost{background:transparent;color:var(--c-brown);box-shadow:inset 0 0 0 2px var(--c-brown)}.btn-ghost:hover{background:var(--c-brown);color:#fff}
+.btn-cream{background:var(--c-cream);color:var(--c-brown)}.btn-cream:hover{background:#fff;color:var(--c-brown)}
+.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:12px;box-sizing:border-box;background:var(--c-sage);border:2px dashed var(--c-mutedsage);color:var(--c-brown);font-size:13px;font-weight:500;border-radius:var(--r-md)}
+.ph-cream{background:var(--c-cream)}
+.tag{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--r-pill);background:var(--c-lightgreen);color:var(--c-brown);font-size:13px;font-weight:500}
+.badge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--r-pill);background:var(--c-peach);color:var(--c-brown);font-size:13px;font-weight:700}
+.kicker{font-family:var(--f-hand);font-size:26px;font-weight:600;color:var(--c-terracotta);line-height:1}
+.iconbtn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:var(--c-brown)}
+.iconbtn:hover{background:var(--c-sage);color:var(--c-brown)}
+.menu-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:var(--r-pill);border:0;background:var(--c-brown);color:#fff;font-family:var(--f-body);font-weight:700;font-size:15px;cursor:pointer}
+.nav-desk{display:none;align-items:center;gap:4px}
+.nav-link{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:var(--r-pill);text-decoration:none;color:var(--c-brown);font-weight:500}
+.nav-link:hover{background:var(--c-sage);color:var(--c-brown)}
+.nav-active{background:var(--c-terracotta);color:#fff}.nav-active:hover{background:var(--c-terracotta);color:#fff}
+.menu-link{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 16px;border-radius:var(--r-sm);text-decoration:none;color:var(--c-brown);font-family:var(--f-display);font-size:22px;font-weight:600}
+.menu-link:hover{background:var(--c-sage);color:var(--c-brown)}
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:50;width:60px;height:60px;border-radius:50%;background:var(--c-terracotta);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(79,44,29,.3)}
+.wa-float:hover{background:var(--c-brown);color:#fff}
+.foot a{color:#fff;text-decoration:none}.foot a:hover{color:#fff;text-decoration:underline}
+.card-link{text-decoration:none;color:var(--c-brown)}.card-link:hover{color:var(--c-brown)}
+.card-link:hover .card-cta{text-decoration:underline}
+:focus-visible{outline:3px solid var(--c-burnt);outline-offset:2px}
+@media (min-width:900px){.nav-desk{display:flex}.menu-btn{display:none}.menu-panel{display:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column">
+
+<!-- ===== HEADER ===== -->
+<header style="position: sticky; top: 0; z-index: 40; background: var(--c-cream); border-bottom: 1px solid rgba(79,44,29,0.15)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="Main.dc.html" aria-label="DIPA, ir al inicio" style="text-decoration: none; display: inline-flex"><dc-import name="Logo" variant="sm" tone="dark" hint-size="96px,46px"></dc-import></a>
+<nav class="nav-desk" aria-label="Menú principal">
+<a class="nav-link nav-active" href="Main.dc.html" aria-current="page">Inicio</a>
+<a class="nav-link" href="Catalogo.dc.html">Catálogo</a>
+<a class="nav-link" href="Como-comprar.dc.html">Cómo comprar</a>
+<a class="nav-link" href="Nosotros.dc.html">Nosotros</a>
+<a class="nav-link" href="Contacto.dc.html">Contacto</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 6px">
+<a class="iconbtn" href="https://instagram.com/disypapel" aria-label="Instagram de DIPA (@disypapel)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17.5 6.5h.01"></path></svg></a>
+<button type="button" class="menu-btn" aria-expanded="{{menuExpanded}}" aria-controls="menu-movil" onClick="{{toggleMenu}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>{{menuLabel}}</button>
+</div>
+</div>
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+<nav id="menu-movil" class="menu-panel" aria-label="Menú principal" style="padding: 8px 12px 16px; border-top: 1px solid rgba(79,44,29,0.15); display: flex; flex-direction: column; gap: 2px">
+<a class="menu-link" href="Main.dc.html" aria-current="page" style="color: var(--c-terracotta)">Inicio</a>
+<a class="menu-link" href="Catalogo.dc.html">Catálogo</a>
+<a class="menu-link" href="Como-comprar.dc.html">Cómo comprar</a>
+<a class="menu-link" href="Nosotros.dc.html">Nosotros</a>
+<a class="menu-link" href="Contacto.dc.html">Contacto</a>
+<a class="btn btn-primary" href="https://wa.me/5491132424474?text=Hola%20DIPA!%20Quiero%20hacer%20una%20consulta" style="margin-top: 12px">Consultá por WhatsApp</a>
+</nav>
+</sc-if>
+</header>
+
+<main style="flex: 1">
+
+<!-- ===== HERO ===== -->
+<section style="position: relative; overflow: hidden">
+<div aria-hidden="true" style="position: absolute; width: 260px; height: 260px; border-radius: 50%; background: var(--c-lightgreen); right: -90px; top: 40px"></div>
+<div aria-hidden="true" style="position: absolute; width: 140px; height: 140px; border-radius: 60% 40% 55% 45%; background: var(--c-peach); left: -50px; bottom: 120px; opacity: 0.55"></div>
+<div style="position: relative; max-width: 1200px; margin: 0 auto; padding: 40px 16px 56px; display: flex; flex-direction: column; gap: 24px">
+<dc-import name="Logo" variant="lg" tone="dark" hint-size="190px,110px"></dc-import>
+<h1 style="font-size: 32px; color: var(--c-brown)">Papelería personalizada, diseñada a tu medida.</h1>
+<p style="font-size: 17px; max-width: 520px">Etiquetas escolares, tarjetería para emprendimientos, kits de cumple y mucho más. Contanos qué necesitás y te pasamos el presupuesto por WhatsApp.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn btn-primary" href="https://wa.me/5491132424474?text=Hola%20DIPA!%20Quiero%20hacer%20una%20consulta"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>Consultá por WhatsApp</a>
+<a class="btn btn-ghost" href="Catalogo.dc.html">Ver catálogo</a>
+</div>
+<div style="position: relative; margin-top: 16px">
+<div aria-hidden="true" style="position: absolute; top: -12px; left: 50%; width: 96px; height: 26px; margin-left: -48px; background: var(--c-peach); opacity: 0.85; transform: rotate(-4deg); border-radius: 3px; z-index: 2"></div>
+<div class="ph" style="aspect-ratio: 4 / 3; width: 100%; border-radius: var(--r-lg); background: var(--c-paper)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"></path></svg>Foto: mesa de trabajo con papelería del local</div>
+<span class="badge" style="position: absolute; left: 12px; bottom: -14px; box-shadow: 0 4px 12px rgba(79,44,29,0.15)">Listo en aprox. 5 días hábiles</span>
+</div>
+</div>
+</section>
+
+<!-- ===== A MEDIDA ===== -->
+<section aria-label="Trabajos a medida">
+<div style="max-width: 1200px; margin: 0 auto; padding: 16px 16px 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
+<div style="background: var(--c-terracotta); border-radius: var(--r-lg); padding: 28px 22px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
+<h2 style="font-size: 24px; color: #fff">¿No encontrás lo que buscás?</h2>
+<p style="color: #fff">Escribinos: hacemos muchos trabajos a medida.</p>
+<a class="btn btn-cream" href="https://wa.me/5491132424474?text=Hola%20DIPA!%20Busco%20algo%20que%20no%20vi%20en%20el%20cat%C3%A1logo" style="margin-top: auto">Consultá por WhatsApp</a>
+</div>
+</div>
+</section>
+
+<!-- ===== AUDIENCIAS ===== -->
+<section style="background: var(--c-sage); border-radius: 40px 40px 0 0">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 16px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="kicker" style="color: var(--c-brown)">¿Para quién es?</span>
+<h2 style="font-size: 28px; color: var(--c-brown)">Papelería para cada ocasión</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+<a class="card-link" href="Catalogo.dc.html" style="display: flex; flex-direction: column; gap: 14px; background: var(--c-paper); border-radius: var(--r-lg); padding: 14px 14px 20px">
+<div class="ph ph-cream" style="aspect-ratio: 16 / 10; width: 100%">Foto: etiquetas escolares con nombre y grado</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 6px">
+<h3 style="font-size: 22px">Escuelas y familias</h3>
+<p>Etiquetas con nombre y grado, planners, horarios con imán y todo para la vuelta al cole.</p>
+<span class="card-cta" style="font-weight: 700; color: var(--c-terracotta); display: inline-flex; align-items: center; gap: 6px; margin-top: 4px">Ver escolares <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+</div>
+</a>
+<a class="card-link" href="Categoria-Emprendimientos.dc.html" style="display: flex; flex-direction: column; gap: 14px; background: var(--c-paper); border-radius: var(--r-lg); padding: 14px 14px 20px">
+<div class="ph ph-cream" style="aspect-ratio: 16 / 10; width: 100%">Foto: tarjetas personales y stickers de un emprendimiento</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 6px">
+<h3 style="font-size: 22px">Emprendedores y comercios</h3>
+<p>Tarjetas personales, stickers con logo, folletos y tarjetería para tu packaging.</p>
+<span class="card-cta" style="font-weight: 700; color: var(--c-terracotta); display: inline-flex; align-items: center; gap: 6px; margin-top: 4px">Ver para emprendimientos <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+</div>
+</a>
+<a class="card-link" href="Catalogo.dc.html" style="display: flex; flex-direction: column; gap: 14px; background: var(--c-paper); border-radius: var(--r-lg); padding: 14px 14px 20px">
+<div class="ph ph-cream" style="aspect-ratio: 16 / 10; width: 100%">Foto: mesa de cumple con banderines y toppers</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 6px">
+<h3 style="font-size: 22px">Cumples y fechas especiales</h3>
+<p>Invitaciones, toppers, banderines y souvenirs. También Día de la Madre, Navidad, comuniones y más.</p>
+<span class="card-cta" style="font-weight: 700; color: var(--c-terracotta); display: inline-flex; align-items: center; gap: 6px; margin-top: 4px">Ver cumples <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+</div>
+</a>
+</div>
+</div>
+</section>
+
+<!-- ===== DESTACADOS ===== -->
+<section style="background: var(--c-cream)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 56px 16px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="kicker">Lo más pedido</span>
+<h2 style="font-size: 28px; color: var(--c-terracotta)">Destacados</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
+
+<article style="display: flex; flex-direction: column; gap: 16px; background: var(--c-paper); border-radius: var(--r-lg); padding: 16px 16px 24px; border: 1px solid rgba(79,44,29,0.1)">
+<div class="ph" style="aspect-ratio: 4 / 3; width: 100%">Foto: tarjetas personales y folletos impresos</div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 0 4px">
+<span class="badge" style="align-self: flex-start">Para emprendimientos</span>
+<h3 style="font-size: 24px; color: var(--c-terracotta)">Tarjetería y publicidad para tu emprendimiento</h3>
+<p>Todo lo que tu marca necesita en papel, con tu logo y tus colores.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span class="tag">Tarjetas personales</span><span class="tag">Folletos</span><span class="tag">Stickers con logo</span><span class="tag">Tags</span><span class="tag">Tarjetería para packaging</span>
+</div>
+<a class="btn btn-secondary" href="Categoria-Emprendimientos.dc.html" style="align-self: flex-start; margin-top: 4px">Ver productos</a>
+</div>
+</article>
+
+<article style="display: flex; flex-direction: column; gap: 16px; background: var(--c-paper); border-radius: var(--r-lg); padding: 16px 16px 24px; border: 1px solid rgba(79,44,29,0.1)">
+<div class="ph" style="aspect-ratio: 4 / 3; width: 100%">Foto: kit de cumple con invitación, toppers y banderines</div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 0 4px">
+<span class="badge" style="align-self: flex-start">Cumples</span>
+<h3 style="font-size: 24px; color: var(--c-terracotta)">Kits de cumple</h3>
+<p>De la invitación al souvenir: armamos todo con la temática que elijas.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span class="tag">Invitación digital</span><span class="tag">Toppers</span><span class="tag">Banderines</span><span class="tag">Tarjeta de souvenir</span><span class="tag">Deco para fondo de fotos</span>
+</div>
+<a class="btn btn-secondary" href="https://wa.me/5491132424474?text=Hola%20DIPA!%20Quiero%20consultar%20por%20un%20kit%20de%20cumple" style="align-self: flex-start; margin-top: 4px">Consultá por tu kit</a>
+</div>
+</article>
+
+</div>
+</div>
+</section>
+
+<!-- ===== INSTAGRAM ===== -->
+<section style="background: var(--c-lightgreen)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 16px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="font-size: 28px; color: var(--c-brown)">Seguinos en Instagram</h2>
+<p style="font-weight: 500">Novedades, trabajos terminados y promos en <a href="https://instagram.com/disypapel" style="color: var(--c-brown); font-weight: 700">@disypapel</a></p>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div class="ph ph-cream" style="aspect-ratio: 1 / 1; border-radius: var(--r-sm); font-size: 12px; padding: 6px">Post de Instagram 1</div>
+<div class="ph ph-cream" style="aspect-ratio: 1 / 1; border-radius: var(--r-sm); font-size: 12px; padding: 6px">Post de Instagram 2</div>
+<div class="ph ph-cream" style="aspect-ratio: 1 / 1; border-radius: var(--r-sm); font-size: 12px; padding: 6px">Post de Instagram 3</div>
+<div class="ph ph-cream" style="aspect-ratio: 1 / 1; border-radius: var(--r-sm); font-size: 12px; padding: 6px">Post de Instagram 4</div>
+<div class="ph ph-cream" style="aspect-ratio: 1 / 1; border-radius: var(--r-sm); font-size: 12px; padding: 6px">Post de Instagram 5</div>
+<div class="ph ph-cream" style="aspect-ratio: 1 / 1; border-radius: var(--r-sm); font-size: 12px; padding: 6px">Post de Instagram 6</div>
+</div>
+<a class="btn btn-ghost" href="https://instagram.com/disypapel" style="align-self: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17.5 6.5h.01"></path></svg>Ir a @disypapel</a>
+</div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section style="background: var(--c-cream)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 16px">
+<div style="background: var(--c-terracotta); color: #fff; border-radius: var(--r-lg); padding: 32px 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start">
+<h2 style="font-size: 28px; color: #fff">¿Tenés una idea? Contanos.</h2>
+<p style="color: #fff">Escribinos por WhatsApp y te ayudamos a elegir. Todo se hace a pedido y personalizado.</p>
+<a class="btn btn-cream" href="https://wa.me/5491132424474?text=Hola%20DIPA!%20Quiero%20hacer%20una%20consulta">Consultá por WhatsApp</a>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="foot" style="background: var(--c-olive); color: #fff">
+<div style="max-width: 1200px; margin: 0 auto; padding: 44px 16px 104px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<dc-import name="Logo" variant="md" tone="light" hint-size="140px,72px"></dc-import>
+<p style="color: #fff">Papelería personalizada e impresiones en Pablo Podestá.</p>
+</div>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+<li style="display: flex; gap: 10px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg><a href="https://wa.me/5491132424474">WhatsApp 11 3242-4474</a></li>
+<li style="display: flex; gap: 10px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17.5 6.5h.01"></path></svg><a href="https://instagram.com/disypapel">Instagram @disypapel</a></li>
+<li style="display: flex; gap: 10px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Lunes a viernes de 9 a 18</li>
+<li style="display: flex; gap: 10px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>Pablo Podestá, Buenos Aires</li>
+</ul>
+<nav aria-label="Pie de página" style="display: flex; flex-direction: column; gap: 10px">
+<a href="Catalogo.dc.html">Catálogo</a>
+<a href="Como-comprar.dc.html">Cómo comprar</a>
+<a href="Nosotros.dc.html">Nosotros</a>
+<a href="Contacto.dc.html">Contacto</a>
+</nav>
+<p style="color: #fff; font-size: 14px; grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 20px">© 2026 DIPA · Diseño y Papel</p>
+</div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5491132424474?text=Hola%20DIPA!%20Quiero%20hacer%20una%20consulta" aria-label="Escribinos por WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":4000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var open = !!(this.state && this.state.menuOpen);
+    var self = this;
+    return {
+      menuOpen: open,
+      menuExpanded: open ? 'true' : 'false',
+      menuLabel: open ? 'Cerrar' : 'Menú',
+      toggleMenu: function () { self.setState({ menuOpen: !open }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
