@@ -33,6 +33,15 @@ Marcá **Tiene página propia** y completá la descripción larga, las opciones 
 
 Cada "Consultá" abre WhatsApp con "Hola DIPA! Quiero consultar por …" y el nombre del producto. Si querés otra frase, escribila en **Cómo se nombra en el mensaje de WhatsApp**.
 
+## Página de inicio
+
+En la pestaña **Inicio** cambiás los textos y las fotos de la portada, "¿No encontrás lo que buscás?", "Para quién es", los Destacados, las fotos de Instagram y la banda final. El diseño queda igual.
+
+- Cada tarjeta de "Para quién es" lleva a una categoría: elegila en **Lleva a la categoría**.
+- El botón de cada Destacado puede llevar a una categoría o abrir WhatsApp con un mensaje.
+- Las fotos de Instagram no se actualizan solas: subilas acá cuando quieras cambiarlas.
+- Para sacar la banda final, desmarcá **Mostrar la banda final**.
+
 ## Datos del local
 
 En **Datos del local** cambiás el WhatsApp, el Instagram, el horario y la dirección de toda la web de una vez.

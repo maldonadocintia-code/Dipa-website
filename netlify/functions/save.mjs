@@ -19,10 +19,15 @@ export const handler = async (event) => {
     let payload;
     try { payload = JSON.parse(event.body || '{}'); } catch { return json(400, { error: 'No se pudo leer lo que mandaste. Probá de nuevo.' }); }
 
+    const current = await getFile(CATALOG_PATH);
+    // An admin tab opened before the home page was editable sends no "home": keep the saved one.
+    if (payload.catalog && payload.catalog.home === undefined && current) {
+      const saved = JSON.parse(current.text);
+      if (saved.home) payload.catalog.home = saved.home;
+    }
     const catalog = validateCatalog(payload.catalog);
     const text = JSON.stringify(catalog, null, 2) + '\n';
 
-    const current = await getFile(CATALOG_PATH);
     if (current && payload.sha && current.sha !== payload.sha) {
       return json(409, { error: 'El catálogo se cambió desde otro lado mientras editabas. Recargá la página para ver la última versión.' });
     }

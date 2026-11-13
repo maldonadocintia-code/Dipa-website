@@ -497,5 +497,112 @@
       "hasPage": false,
       "photoLabel": "Foto: impresiones full color"
     }
-  ]
+  ],
+  "home": {
+    "hero": {
+      "title": "Papelería personalizada, diseñada a tu medida.",
+      "text": "Etiquetas escolares, tarjetería para emprendimientos, kits de cumple y mucho más. Contanos qué necesitás y te pasamos el presupuesto por WhatsApp.",
+      "badge": "Listo en aprox. 5 días hábiles",
+      "photoLabel": "Foto: mesa de trabajo con papelería del local",
+      "smallPhotoLabel": "Foto: detalle de stickers"
+    },
+    "notFound": {
+      "title": "¿No encontrás lo que buscás?",
+      "text": "Escribinos: hacemos muchos trabajos a medida.",
+      "message": "Hola DIPA! Busco algo que no vi en el catálogo"
+    },
+    "audiences": {
+      "kicker": "¿Para quién es?",
+      "title": "Papelería para cada ocasión",
+      "cards": [
+        {
+          "title": "Escuelas y familias",
+          "text": "Etiquetas con nombre y grado, planners, horarios con imán y todo para la vuelta al cole.",
+          "linkLabel": "Ver escolares",
+          "category": "escolares",
+          "photoLabel": "Foto: etiquetas escolares con nombre y grado"
+        },
+        {
+          "title": "Emprendedores y comercios",
+          "text": "Tarjetas personales, stickers con logo, folletos y tarjetería para tu packaging.",
+          "linkLabel": "Ver para emprendimientos",
+          "category": "para-emprendimientos",
+          "photoLabel": "Foto: tarjetas personales y stickers de un emprendimiento"
+        },
+        {
+          "title": "Cumples y fechas especiales",
+          "text": "Invitaciones, toppers, banderines y souvenirs. También Día de la Madre, Navidad, comuniones y más.",
+          "linkLabel": "Ver cumples",
+          "category": "cumples",
+          "photoLabel": "Foto: mesa de cumple con banderines y toppers"
+        }
+      ]
+    },
+    "featured": {
+      "kicker": "Lo más pedido",
+      "title": "Destacados",
+      "cards": [
+        {
+          "badge": "Para emprendimientos",
+          "title": "Tarjetería y publicidad para tu emprendimiento",
+          "text": "Todo lo que tu marca necesita en papel, con tu logo y tus colores.",
+          "tags": [
+            "Tarjetas personales",
+            "Folletos",
+            "Stickers con logo",
+            "Tags",
+            "Tarjetería para packaging"
+          ],
+          "buttonLabel": "Ver productos",
+          "category": "para-emprendimientos",
+          "photoLabel": "Foto: tarjetas personales y folletos impresos"
+        },
+        {
+          "badge": "Cumples",
+          "title": "Kits de cumple",
+          "text": "De la invitación al souvenir: armamos todo con la temática que elijas.",
+          "tags": [
+            "Invitación digital",
+            "Toppers",
+            "Banderines",
+            "Tarjeta de souvenir",
+            "Deco para fondo de fotos"
+          ],
+          "buttonLabel": "Consultá por tu kit",
+          "message": "Hola DIPA! Quiero consultar por un kit de cumple",
+          "photoLabel": "Foto: kit de cumple con invitación, toppers y banderines"
+        }
+      ]
+    },
+    "instagram": {
+      "title": "Seguinos en Instagram",
+      "text": "Novedades, trabajos terminados y promos en",
+      "photos": [
+        {
+          "label": "Post de Instagram 1"
+        },
+        {
+          "label": "Post de Instagram 2"
+        },
+        {
+          "label": "Post de Instagram 3"
+        },
+        {
+          "label": "Post de Instagram 4"
+        },
+        {
+          "label": "Post de Instagram 5"
+        },
+        {
+          "label": "Post de Instagram 6"
+        }
+      ]
+    },
+    "closing": {
+      "show": true,
+      "title": "¿Tenés una idea? Contanos.",
+      "text": "Escribinos por WhatsApp y te ayudamos a elegir. Todo se hace a pedido y personalizado.",
+      "message": "Hola DIPA! Quiero hacer una consulta"
+    }
+  }
 }

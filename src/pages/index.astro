@@ -2,16 +2,14 @@
 import Base from '../layouts/Base.astro';
 import Logo from '../components/Logo.astro';
 import Icon from '../components/Icon.astro';
+import Photo from '../components/Photo.astro';
 import { wa, MSG_GENERAL, instagramUrl, site } from '../lib/site';
+import { catalog } from '../lib/catalog';
 
-const MSG_NOT_FOUND = 'Hola DIPA! Busco algo que no vi en el catálogo';
-const MSG_KIT = 'Hola DIPA! Quiero consultar por un kit de cumple';
-
-const audiences = [
-  { href: '/catalogo/escolares', photo: 'Foto: etiquetas escolares con nombre y grado', title: 'Escuelas y familias', text: 'Etiquetas con nombre y grado, planners, horarios con imán y todo para la vuelta al cole.', cta: 'Ver escolares' },
-  { href: '/catalogo/para-emprendimientos', photo: 'Foto: tarjetas personales y stickers de un emprendimiento', title: 'Emprendedores y comercios', text: 'Tarjetas personales, stickers con logo, folletos y tarjetería para tu packaging.', cta: 'Ver para emprendimientos' },
-  { href: '/catalogo/cumples', photo: 'Foto: mesa de cumple con banderines y toppers', title: 'Cumples y fechas especiales', text: 'Invitaciones, toppers, banderines y souvenirs. También Día de la Madre, Navidad, comuniones y más.', cta: 'Ver cumples' },
-];
+// All text and photos come from src/data/catalog.json → "home" (editable in /admin → Inicio).
+const home = catalog.home!;
+const { hero, notFound, audiences, featured, instagram, closing } = home;
+const catHref = (id: string) => `/catalogo/${id}`;
 ---
 <Base title="DIPA · Papelería personalizada en Pablo Podestá" current="inicio" home>
 
@@ -22,8 +20,8 @@ const audiences = [
     <div class="wrap hero-grid">
       <div class="hero-text">
         <Logo variant="lg" tone="dark" />
-        <h1>Papelería personalizada, diseñada a tu medida.</h1>
-        <p class="hero-lead">Etiquetas escolares, tarjetería para emprendimientos, kits de cumple y mucho más. Contanos qué necesitás y te pasamos el presupuesto por WhatsApp.</p>
+        <h1>{hero.title}</h1>
+        <p class="hero-lead">{hero.text}</p>
         <div class="hero-btns">
           <a class="btn btn-primary" href={wa(MSG_GENERAL)}><Icon name="chat" size={22} />Consultá por WhatsApp</a>
           <a class="btn btn-ghost" href="/catalogo">Ver catálogo</a>
@@ -31,9 +29,9 @@ const audiences = [
       </div>
       <div class="hero-media">
         <div class="tape hero-tape" aria-hidden="true"></div>
-        <div class="ph ph-paper hero-photo"><Icon name="image" size={28} stroke={1.8} />Foto: mesa de trabajo con papelería del local</div>
-        <div class="ph ph-cream hero-photo-small">Foto: detalle de stickers</div>
-        <span class="badge hero-badge">Listo en aprox. 5 días hábiles</span>
+        <Photo image={hero.image} label={hero.photoLabel || 'Foto principal'} class="ph-paper hero-photo" icon />
+        {(hero.smallImage || hero.smallPhotoLabel) && <Photo image={hero.smallImage} label={hero.smallPhotoLabel || ''} class="ph-cream hero-photo-small" />}
+        {hero.badge && <span class="badge hero-badge">{hero.badge}</span>}
       </div>
     </div>
   </section>
@@ -42,20 +40,20 @@ const audiences = [
   <section aria-label="Trabajos a medida">
     <div class="wrap amedida">
       <div class="band amedida-mobile">
-        <h2>¿No encontrás lo que buscás?</h2>
-        <p>Escribinos: hacemos muchos trabajos a medida.</p>
-        <a class="btn btn-cream" href={wa(MSG_NOT_FOUND)} style="margin-top:auto">Consultá por WhatsApp</a>
+        <h2>{notFound.title}</h2>
+        <p>{notFound.text}</p>
+        <a class="btn btn-cream" href={wa(notFound.message)} style="margin-top:auto">Consultá por WhatsApp</a>
       </div>
       <div class="note">
         <div class="tape note-tape" aria-hidden="true"></div>
         <div class="note-main">
           <span class="note-ic" aria-hidden="true"><Icon name="search" size={28} /></span>
           <div class="stack" style="gap:4px">
-            <h2>¿No encontrás lo que buscás?</h2>
-            <p>Escribinos: hacemos muchos trabajos a medida.</p>
+            <h2>{notFound.title}</h2>
+            <p>{notFound.text}</p>
           </div>
         </div>
-        <a class="btn btn-primary" href={wa(MSG_NOT_FOUND)}><Icon name="chat" size={22} />Consultá por WhatsApp</a>
+        <a class="btn btn-primary" href={wa(notFound.message)}><Icon name="chat" size={22} />Consultá por WhatsApp</a>
       </div>
     </div>
   </section>
@@ -64,17 +62,17 @@ const audiences = [
   <section class="aud">
     <div class="wrap aud-in">
       <div class="aud-head">
-        <span class="kicker kicker-brown">¿Para quién es?</span>
-        <h2>Papelería para cada ocasión</h2>
+        {audiences.kicker && <span class="kicker kicker-brown">{audiences.kicker}</span>}
+        <h2>{audiences.title}</h2>
       </div>
       <div class="aud-grid">
-        {audiences.map((a) => (
-          <a class="card-link aud-card" href={a.href}>
-            <div class="ph ph-cream">{a.photo}</div>
+        {audiences.cards.map((a) => (
+          <a class="card-link aud-card" href={catHref(a.category)}>
+            <Photo image={a.image} label={a.photoLabel || ''} class="ph-cream" />
             <div class="aud-body">
               <h3>{a.title}</h3>
-              <p>{a.text}</p>
-              <span class="card-cta">{a.cta} <Icon name="arrow" size={18} stroke={2.2} /></span>
+              {a.text && <p>{a.text}</p>}
+              <span class="card-cta">{a.linkLabel} <Icon name="arrow" size={18} stroke={2.2} /></span>
             </div>
           </a>
         ))}
@@ -86,34 +84,22 @@ const audiences = [
   <section style="background: var(--c-cream)">
     <div class="wrap dest">
       <div class="stack-6">
-        <span class="kicker">Lo más pedido</span>
-        <h2 class="sec-h" style="color: var(--c-terracotta)">Destacados</h2>
+        {featured.kicker && <span class="kicker">{featured.kicker}</span>}
+        <h2 class="sec-h" style="color: var(--c-terracotta)">{featured.title}</h2>
       </div>
       <div class="dest-grid">
-        <article class="feat">
-          <div class="ph">Foto: tarjetas personales y folletos impresos</div>
-          <div class="feat-body">
-            <span class="badge self-start">Para emprendimientos</span>
-            <h3>Tarjetería y publicidad para tu emprendimiento</h3>
-            <p>Todo lo que tu marca necesita en papel, con tu logo y tus colores.</p>
-            <div class="tags">
-              <span class="tag">Tarjetas personales</span><span class="tag">Folletos</span><span class="tag">Stickers con logo</span><span class="tag">Tags</span><span class="tag only-mobile">Tarjetería para packaging</span>
+        {featured.cards.map((f) => (
+          <article class="feat">
+            <Photo image={f.image} label={f.photoLabel || ''} />
+            <div class="feat-body">
+              {f.badge && <span class="badge self-start">{f.badge}</span>}
+              <h3>{f.title}</h3>
+              {f.text && <p>{f.text}</p>}
+              {f.tags && <div class="tags">{f.tags.map((t) => <span class="tag">{t}</span>)}</div>}
+              <a class="btn btn-secondary self-start" href={f.category ? catHref(f.category) : wa(f.message)}>{f.buttonLabel}</a>
             </div>
-            <a class="btn btn-secondary self-start" href="/catalogo/para-emprendimientos">Ver productos</a>
-          </div>
-        </article>
-        <article class="feat">
-          <div class="ph">Foto: kit de cumple con invitación, toppers y banderines</div>
-          <div class="feat-body">
-            <span class="badge self-start">Cumples</span>
-            <h3>Kits de cumple</h3>
-            <p>De la invitación al souvenir: armamos todo con la temática que elijas.</p>
-            <div class="tags">
-              <span class="tag">Invitación digital</span><span class="tag">Toppers</span><span class="tag">Banderines</span><span class="tag only-mobile">Tarjeta de souvenir</span><span class="tag only-mobile">Deco para fondo de fotos</span><span class="tag only-desk">Souvenirs</span>
-            </div>
-            <a class="btn btn-secondary self-start" href={wa(MSG_KIT)}>Consultá por tu kit</a>
-          </div>
-        </article>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -123,30 +109,32 @@ const audiences = [
     <div class="wrap ig">
       <div class="ig-head">
         <div class="stack" style="gap:4px">
-          <h2 class="sec-h">Seguinos en Instagram</h2>
-          <p style="font-weight:500">Novedades, trabajos terminados y promos en <a href={instagramUrl} style="color: var(--c-brown); font-weight: 700">@{site.instagramUser}</a></p>
+          <h2 class="sec-h">{instagram.title}</h2>
+          <p style="font-weight:500">{instagram.text} <a href={instagramUrl} style="color: var(--c-brown); font-weight: 700">@{site.instagramUser}</a></p>
         </div>
         <a class="btn btn-ghost ig-btn-desk" href={instagramUrl}><Icon name="instagram" size={20} />Ir a @{site.instagramUser}</a>
       </div>
       <div class="ig-grid">
-        {[1, 2, 3, 4, 5, 6].map((n) => <div class="ph ph-cream">Post de Instagram {n}</div>)}
+        {instagram.photos.map((ph) => <Photo image={ph.image} label={ph.label} class="ph-cream" />)}
       </div>
       <a class="btn btn-ghost self-start ig-btn-mobile" href={instagramUrl}><Icon name="instagram" size={20} />Ir a @{site.instagramUser}</a>
     </div>
   </section>
 
   <!-- CTA FINAL -->
-  <section style="background: var(--c-cream)">
-    <div class="wrap cta-wrap">
-      <div class="cta">
-        <div class="cta-text">
-          <h2>¿Tenés una idea? Contanos.</h2>
-          <p>Escribinos por WhatsApp y te ayudamos a elegir. Todo se hace a pedido y personalizado.</p>
+  {closing.show && (
+    <section style="background: var(--c-cream)">
+      <div class="wrap cta-wrap">
+        <div class="cta">
+          <div class="cta-text">
+            <h2>{closing.title}</h2>
+            {closing.text && <p>{closing.text}</p>}
+          </div>
+          <a class="btn btn-cream" href={wa(closing.message)}>Consultá por WhatsApp</a>
         </div>
-        <a class="btn btn-cream" href={wa(MSG_GENERAL)}>Consultá por WhatsApp</a>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
 </Base>
 
@@ -162,8 +150,8 @@ const audiences = [
   .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
   .hero-media { position: relative; margin-top: 16px; }
   .hero-tape { top: -12px; left: 50%; width: 96px; margin-left: -48px; transform: rotate(-4deg); }
-  .hero-photo { aspect-ratio: 4 / 3; width: 100%; border-radius: var(--r-lg); }
-  .hero-photo-small { display: none; }
+  .hero-media :global(.hero-photo) { aspect-ratio: 4 / 3; width: 100%; border-radius: var(--r-lg); }
+  .hero-media :global(.hero-photo-small) { display: none; }
   .hero-badge { position: absolute; left: 12px; bottom: -14px; box-shadow: 0 4px 12px rgba(79,44,29,0.15); z-index: 3; }
 
   .amedida { padding-top: 16px; padding-bottom: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
@@ -175,14 +163,14 @@ const audiences = [
   .aud-head h2, .sec-h { font-size: 28px; color: var(--c-brown); }
   .aud-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
   .aud-card { display: flex; flex-direction: column; gap: 14px; background: var(--c-paper); border-radius: var(--r-lg); padding: 14px 14px 20px; }
-  .aud-card .ph { aspect-ratio: 16 / 10; width: 100%; }
+  .aud-card :global(.ph), .aud-card :global(.photo) { aspect-ratio: 16 / 10; width: 100%; }
   .aud-body { display: flex; flex-direction: column; gap: 6px; padding: 0 6px; }
   .aud-body h3 { font-size: 22px; }
 
   .dest { padding-top: 56px; padding-bottom: 56px; display: flex; flex-direction: column; gap: 28px; }
   .dest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
   .feat { display: flex; flex-direction: column; gap: 16px; background: var(--c-paper); border-radius: var(--r-lg); padding: 16px 16px 24px; border: 1px solid var(--c-line-soft); }
-  .feat > .ph { aspect-ratio: 4 / 3; width: 100%; }
+  .feat > :global(.ph), .feat > :global(.photo) { aspect-ratio: 4 / 3; width: 100%; }
   .feat-body { display: flex; flex-direction: column; gap: 12px; padding: 0 4px; }
   .feat-body h3 { font-size: 24px; color: var(--c-terracotta); }
   .feat-body .btn { margin-top: 4px; }
@@ -191,7 +179,8 @@ const audiences = [
   .ig-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; }
   .ig-btn-desk { display: none; }
   .ig-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-  .ig-grid .ph { aspect-ratio: 1 / 1; border-radius: var(--r-sm); font-size: 12px; padding: 6px; }
+  .ig-grid :global(.ph), .ig-grid :global(.photo) { aspect-ratio: 1 / 1; border-radius: var(--r-sm); font-size: 12px; padding: 6px; }
+  .ig-grid :global(.photo), .feat > :global(.photo), .aud-card :global(.photo) { padding: 0; }
 
   .cta-wrap { padding-top: 48px; padding-bottom: 48px; }
   .cta { background: var(--c-terracotta); border-radius: var(--r-lg); padding: 32px 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
@@ -209,9 +198,9 @@ const audiences = [
     .hero-btns { gap: 14px; }
     .hero-media { margin-top: 0; padding: 20px 0 20px 40px; }
     .hero-tape { top: 8px; width: 120px; height: 30px; margin-left: -40px; z-index: 3; }
-    .hero-photo { aspect-ratio: 5 / 4; font-size: 15px; }
-    .hero-photo svg { width: 32px; height: 32px; }
-    .hero-photo-small { display: flex; position: absolute; left: 0; bottom: 0; width: 180px; aspect-ratio: 1 / 1; border-radius: var(--r-md); transform: rotate(-3deg); box-shadow: 0 10px 24px rgba(79,44,29,0.15); z-index: 2; }
+    .hero-media :global(.hero-photo) { aspect-ratio: 5 / 4; font-size: 15px; }
+    .hero-media :global(.hero-photo svg) { width: 32px; height: 32px; }
+    .hero-media :global(.hero-photo-small) { display: flex; position: absolute; left: 0; bottom: 0; width: 180px; aspect-ratio: 1 / 1; border-radius: var(--r-md); transform: rotate(-3deg); box-shadow: 0 10px 24px rgba(79,44,29,0.15); z-index: 2; }
     .hero-badge { left: auto; right: 16px; bottom: 0; }
 
     .amedida { padding-top: 8px; padding-bottom: 72px; display: block; }
@@ -229,7 +218,7 @@ const audiences = [
     .aud-head h2, .sec-h { font-size: 42px; }
     .aud-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     .aud-card { gap: 18px; padding: 16px 16px 28px; }
-    .aud-card .ph { aspect-ratio: 4 / 3; }
+    .aud-card :global(.ph), .aud-card :global(.photo) { aspect-ratio: 4 / 3; }
     .aud-body { gap: 8px; padding: 0 8px; }
     .aud-body h3 { font-size: 26px; }
     .aud-body .card-cta { margin-top: 6px; }
@@ -238,7 +227,7 @@ const audiences = [
     .dest .stack-6 { gap: 8px; }
     .dest-grid { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 32px; }
     .feat { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; padding: 20px; align-items: center; }
-    .feat > .ph { aspect-ratio: 3 / 4; }
+    .feat > :global(.ph), .feat > :global(.photo) { aspect-ratio: 3 / 4; }
     .feat-body { gap: 14px; padding: 8px 8px 8px 0; }
     .feat-body h3 { font-size: 28px; }
 
@@ -248,7 +237,7 @@ const audiences = [
     .ig-btn-desk { display: inline-flex; }
     .ig-btn-mobile { display: none; }
     .ig-grid { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
-    .ig-grid .ph { border-radius: var(--r-md); font-size: 14px; padding: 12px; }
+    .ig-grid :global(.ph), .ig-grid :global(.photo) { border-radius: var(--r-md); font-size: 14px; padding: 12px; }
 
     .cta-wrap { padding-top: 80px; padding-bottom: 80px; }
     .cta { border-radius: 40px; padding: 56px 48px; flex-direction: row; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
