@@ -94,7 +94,8 @@ img { max-width: 100%; display: block; }
 .menu-panel .btn { margin-top: 12px; }
 
 /* ===== Floating WhatsApp ===== */
-.wa-float { position: fixed; right: 16px; bottom: 16px; z-index: 50; width: 60px; height: 60px; border-radius: 50%; background: var(--c-terracotta); color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 6px 18px rgba(79, 44, 29, .3); text-decoration: none; font-weight: 700; }
+/* bottom: 104px keeps it above Netlify's free-plan badge (216 x 92 px, bottom-right). */
+.wa-float { position: fixed; right: 16px; bottom: 104px; z-index: 50; width: 60px; height: 60px; border-radius: 50%; background: var(--c-terracotta); color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 6px 18px rgba(79, 44, 29, .3); text-decoration: none; font-weight: 700; }
 .wa-float:hover { background: var(--c-brown); color: #fff; }
 .wa-float-text { display: none; }
 
@@ -203,7 +204,7 @@ img { max-width: 100%; display: block; }
   .home .site-header .bar { padding-top: 12px; padding-bottom: 12px; gap: 16px; }
   .home .head-actions { gap: 8px; }
   .home .head-cta { display: inline-flex; }
-  .home .wa-float { right: 28px; bottom: 28px; width: auto; padding: 0 24px 0 20px; border-radius: var(--r-pill); }
+  .home .wa-float { right: 28px; bottom: 112px; width: auto; padding: 0 24px 0 20px; border-radius: var(--r-pill); }
   .home .wa-float svg { width: 26px; height: 26px; }
   .home .wa-float-text { display: inline; }
   .foot-rich .foot-grid { padding-top: 64px; padding-bottom: 48px; gap: 40px; }
