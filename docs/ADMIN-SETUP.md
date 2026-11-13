@@ -70,3 +70,15 @@ To add or remove an editor later: change `ADMIN_EMAILS` (and the Google test use
 - **Photos** are resized in the browser (max 1600 px, JPEG) and committed to `public/uploads/`. Each photo upload is its own commit and triggers a rebuild; Netlify's free plan has plenty of build minutes for this.
 - **Safety:** every save is validated (`lib/catalog-schema.mjs`) before it's committed, so a save can't break the build. If two people edit at once, the second save is refused rather than overwriting the first. Every change is a git commit, so anything can be rolled back.
 - **Local testing of the portal** needs the Netlify CLI (`npx netlify dev`) with the same environment variables in a local `.env`, plus `http://localhost:8888` in the Google client's JavaScript origins.
+
+## Troubleshooting
+
+| What you see | What to check |
+|---|---|
+| `/.netlify/functions/config` says "Falta configurar GOOGLE_CLIENT_ID en Netlify" | The variable is on **this** site (Site configuration, not Team settings), named exactly `GOOGLE_CLIENT_ID`, scoped to Functions, and a deploy has finished **after** it was added. |
+| "El panel todavía no está configurado (GOOGLE_CLIENT_ID / ADMIN_EMAILS)" | Same checks for `ADMIN_EMAILS`. |
+| "… no tiene permiso para editar este sitio" | That email is missing from `ADMIN_EMAILS` (comma-separated, no spaces). Redeploy after changing it. |
+| Google says "Access blocked" or the app "has not completed verification" | Add the email as a **test user** in Google Auth Platform → Audience. |
+| Google sign-in popup closes and nothing happens | The Netlify address must be in the Google client's **Authorised JavaScript origins**, exactly `https://dipa-grafica.netlify.app` (no trailing slash). |
+| "El sitio todavía no está conectado a GitHub" or "No se pudo guardar en GitHub (401)" | `GITHUB_TOKEN` is missing or expired, or `GITHUB_REPO` is wrong. |
+| "No se pudo guardar en GitHub (403/404)" | The token doesn't have **Contents: Read and write** on Dipa-website. |
