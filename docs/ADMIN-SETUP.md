@@ -14,7 +14,7 @@ The portal saves to the branch in `GITHUB_BRANCH` (step 5), and Netlify publishe
 
 1. **netlify.com** → **Add new site** → **Import an existing project** → **GitHub** → `Dipa-website`.
 2. Build settings come from `netlify.toml` (`npm run build`, publish `dist`, functions `netlify/functions`). **Deploy**.
-3. Note the URL, for example `https://dipa.netlify.app`.
+3. Note the URL, here `https://dipa-grafica.netlify.app`.
 
 The public site works now. The portal won't let anyone in until steps 3–5 are done.
 
@@ -26,7 +26,7 @@ The public site works now. The portal won't let anyone in until steps 3–5 are 
    - Audience: **External**.
    - **Test users**: add **your email and the owner's**. While the app is unpublished, only listed test users can sign in. Skip this and Google blocks her before our allowlist even sees her.
 3. **Clients** → **Create client** → **Web application**, name `Admin portal`.
-   - **Authorised JavaScript origins**: the Netlify URL (e.g. `https://dipa.netlify.app`). Add the custom domain too when there is one.
+   - **Authorised JavaScript origins**: the Netlify URL (`https://dipa-grafica.netlify.app`). Add the custom domain too when there is one.
 4. Copy the **Client ID** (ends in `.apps.googleusercontent.com`).
 
 The owner's email must be a Google account. A Gmail address already is one; any other address can be turned into a Google account at accounts.google.com ("use my current email address instead").
