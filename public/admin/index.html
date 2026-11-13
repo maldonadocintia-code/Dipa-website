@@ -15,6 +15,11 @@
     <span class="top-title">Panel</span>
     <span class="top-user" id="user"></span>
     <button type="button" class="link" id="signout" hidden>Salir</button>
+    <div class="savebar" id="savebar" hidden>
+      <span id="save-status" role="status">Sin cambios</span>
+      <a class="link" href="/" target="_blank" rel="noopener">Ver la web</a>
+      <button type="button" class="btn btn-primary" id="save" disabled>Guardar y publicar</button>
+    </div>
   </header>
 
   <main id="app">
@@ -25,12 +30,6 @@
       <p class="msg" id="login-msg" role="status"></p>
     </section>
   </main>
-
-  <div class="savebar" id="savebar" hidden>
-    <span id="save-status" role="status">Sin cambios</span>
-    <a class="link" href="/" target="_blank" rel="noopener">Ver la web</a>
-    <button type="button" class="btn btn-primary" id="save" disabled>Guardar y publicar</button>
-  </div>
 
   <script src="/admin/admin.js"></script>
 </body>
