@@ -1,0 +1,44 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { wa, instagramUrl, site } from '../lib/site';
+// rich: the desktop home footer with column headings (Inicio-Desktop design). Elsewhere: Main.dc.html footer.
+interface Props { rich?: boolean }
+const { rich = false } = Astro.props;
+---
+<footer class:list={['foot', { 'foot-rich': rich }]}>
+  <div class="wrap foot-grid">
+    <div class="foot-col">
+      <Logo variant="md" tone="light" />
+      <p>{site.footerTagline}</p>
+    </div>
+    <div class="foot-col foot-contact">
+      {rich && <h2 class="foot-h">Contacto</h2>}
+      <ul class="foot-list">
+        <li><Icon name="chat" size={20} /><a href={wa()}>WhatsApp {site.whatsappDisplay}</a></li>
+        <li><Icon name="instagram" size={20} /><a href={instagramUrl}>Instagram @{site.instagramUser}</a></li>
+        {!rich && <li><Icon name="clock" size={20} />{site.hours}</li>}
+        {!rich && <li><Icon name="pin" size={20} />{site.area}</li>}
+      </ul>
+    </div>
+    {rich && (
+      <div class="foot-col">
+        <h2 class="foot-h">Horario y lugar</h2>
+        <ul class="foot-list">
+          <li><Icon name="clock" size={20} />{site.hours}</li>
+          <li><Icon name="pin" size={20} />{site.area}</li>
+        </ul>
+      </div>
+    )}
+    <div class="foot-col">
+      {rich && <h2 class="foot-h">Navegá</h2>}
+      <nav aria-label="Pie de página" class="foot-nav">
+        <a href="/catalogo">Catálogo</a>
+        <a href="/como-comprar">Cómo comprar</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/contacto">Contacto</a>
+      </nav>
+    </div>
+    <p class="foot-copy">{site.copyright}</p>
+  </div>
+</footer>

@@ -1,0 +1,7 @@
+---
+import Icon from './Icon.astro';
+import { wa, MSG_GENERAL } from '../lib/site';
+interface Props { message?: string }
+const { message = MSG_GENERAL } = Astro.props;
+---
+<a class="wa-float" href={wa(message)} aria-label="Escribinos por WhatsApp"><Icon name="chat" size={28} /><span class="wa-float-text" aria-hidden="true">Consultá por WhatsApp</span></a>

@@ -1,0 +1,10 @@
+---
+import { wa } from '../lib/site';
+interface Props { title: string; text: string; message: string; button?: string }
+const { title, text, message, button = 'Consultá por WhatsApp' } = Astro.props;
+---
+<div class="band">
+  <h2>{title}</h2>
+  <p>{text}</p>
+  <a class="btn btn-cream" href={wa(message)}>{button}</a>
+</div>

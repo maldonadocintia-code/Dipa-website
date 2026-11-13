@@ -1,0 +1,139 @@
+# Admin panel for the DIPA catalogue (Sveltia CMS, Decap-compatible).
+# Each save commits a JSON file to GitHub; Netlify rebuilds the site in about a minute.
+# Field names must match src/content.config.ts.
+
+backend:
+  name: github
+  repo: maldonadocintia-code/Dipa-website
+  branch: main
+  base_url: https://api.netlify.com   # Netlify's GitHub OAuth provider (see docs/ADMIN-SETUP.md)
+  commit_messages:
+    create: 'CMS: crear {{collection}} "{{slug}}"'
+    update: 'CMS: editar {{collection}} "{{slug}}"'
+    delete: 'CMS: borrar {{collection}} "{{slug}}"'
+    uploadMedia: 'CMS: subir foto "{{path}}"'
+    deleteMedia: 'CMS: borrar foto "{{path}}"'
+
+media_folder: public/uploads
+public_folder: /uploads
+site_url: https://dipa.netlify.app
+display_url: https://dipa.netlify.app
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: products
+    label: Productos
+    label_singular: Producto
+    folder: src/content/products
+    format: json
+    extension: json
+    create: true
+    delete: true
+    identifier_field: title
+    slug: '{{title}}'
+    summary: '{{title}} · {{category}}'
+    sortable_fields: [title, category, order]
+    view_groups:
+      - label: Categoría
+        field: category
+    fields:
+      - { name: title, label: Nombre, widget: string }
+      - name: category
+        label: Categoría
+        widget: relation
+        collection: categories
+        value_field: '{{slug}}'
+        search_fields: [title]
+        display_fields: [title]
+      - { name: summary, label: Descripción corta (tarjeta), widget: text, required: false, default: '' }
+      - { name: image, label: Foto principal, widget: image, required: false, hint: 'Si no hay foto, se muestra el recuadro con el texto de abajo.' }
+      - { name: photoLabel, label: Texto del recuadro sin foto, widget: string, required: false, hint: 'Por ejemplo "Foto: tarjetas personales".' }
+      - { name: order, label: Orden en la categoría, widget: number, value_type: int, default: 100, hint: 'Los números más chicos aparecen primero.' }
+      - { name: featured, label: Destacado, widget: boolean, default: false, hint: 'Borde durazno y etiqueta "Destacado".' }
+      - { name: hidden, label: Ocultar del sitio, widget: boolean, default: false, hint: 'Lo saca del sitio sin borrarlo.' }
+      - { name: whatsappName, label: Cómo se nombra en el mensaje de WhatsApp, widget: string, required: false, hint: 'El mensaje dice "Hola DIPA! Quiero consultar por …". Si lo dejás vacío, se usa el nombre en minúsculas.' }
+      - { name: hasPage, label: Tiene página propia, widget: boolean, default: false, hint: 'Si está activado, la tarjeta dice "Ver producto" y lleva a una página con galería y opciones. Si no, "Consultá" abre WhatsApp.' }
+      - { name: badge, label: Etiqueta de la página, widget: string, required: false, hint: 'Solo con página propia. Si está vacío, se usa el nombre de la categoría.' }
+      - { name: description, label: Descripción larga, widget: text, required: false, hint: 'Solo con página propia.' }
+      - name: options
+        label: Opciones (forma, tamaños, material…)
+        label_singular: Opción
+        widget: list
+        required: false
+        hint: Solo con página propia.
+        fields:
+          - { name: label, label: Título, widget: string }
+          - { name: value, label: Detalle, widget: string }
+      - name: gallery
+        label: Galería
+        label_singular: Foto
+        widget: list
+        required: false
+        hint: Solo con página propia. Hasta 4 fotos queda mejor.
+        fields:
+          - { name: image, label: Foto, widget: image, required: false }
+          - { name: label, label: Descripción de la foto, widget: string }
+      - name: related
+        label: También te puede interesar
+        widget: relation
+        collection: products
+        value_field: '{{slug}}'
+        search_fields: [title]
+        display_fields: [title]
+        multiple: true
+        required: false
+        hint: Solo con página propia.
+
+  - name: categories
+    label: Categorías
+    label_singular: Categoría
+    folder: src/content/categories
+    format: json
+    extension: json
+    create: true
+    delete: true
+    identifier_field: title
+    slug: '{{title}}'
+    sortable_fields: [title, order]
+    fields:
+      - { name: title, label: Nombre, widget: string }
+      - { name: summary, label: Descripción corta (catálogo), widget: text, required: false, default: '' }
+      - { name: image, label: Foto, widget: image, required: false }
+      - { name: photoLabel, label: Texto del recuadro sin foto, widget: string, required: false }
+      - { name: order, label: Orden en el catálogo, widget: number, value_type: int, default: 100 }
+      - { name: hidden, label: Ocultar del sitio, widget: boolean, default: false, hint: 'Oculta la categoría y todos sus productos.' }
+      - { name: kicker, label: Frase a mano (arriba del título), widget: string, required: false }
+      - { name: intro, label: Texto de presentación, widget: text, required: false, hint: 'Si está vacío, se usa la descripción corta.' }
+      - { name: note, label: Aclaración (etiqueta verde), widget: string, required: false, hint: 'Por ejemplo "No incluye colocación".' }
+      - { name: papers, label: Tipos de papel, widget: list, required: false }
+      - { name: sizes, label: Tamaños, widget: list, required: false }
+      - name: combo
+        label: Banda final propia
+        widget: object
+        required: false
+        collapsed: true
+        hint: 'Si está vacía, se muestra "¿No encontrás lo que buscás?".'
+        fields:
+          - { name: title, label: Título, widget: string }
+          - { name: text, label: Texto, widget: string }
+          - { name: message, label: Mensaje de WhatsApp, widget: string }
+
+  - name: settings
+    label: Datos del local
+    files:
+      - name: site
+        label: Contacto y horario
+        file: src/data/site.json
+        format: json
+        fields:
+          - { name: whatsappNumber, label: WhatsApp para los enlaces, widget: string, pattern: ['^549\d{10}$', 'Formato 549 + código de área sin 0 + número sin 15. Ej: 5491132424474'] }
+          - { name: whatsappDisplay, label: WhatsApp como se muestra, widget: string }
+          - { name: instagramUser, label: Usuario de Instagram (sin @), widget: string }
+          - { name: hours, label: Horario, widget: string }
+          - { name: area, label: Zona, widget: string }
+          - { name: address, label: Dirección del local, widget: string }
+          - { name: footerTagline, label: Frase del pie, widget: string }
+          - { name: copyright, label: Texto de copyright, widget: string }

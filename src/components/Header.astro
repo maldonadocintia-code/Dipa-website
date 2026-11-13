@@ -1,0 +1,54 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { wa, MSG_GENERAL, instagramUrl, site } from '../lib/site';
+interface Props { current?: string; headCta?: boolean }
+const { current, headCta = false } = Astro.props;
+const links = [
+  ['inicio', '/', 'Inicio'],
+  ['catalogo', '/catalogo', 'Catálogo'],
+  ['como-comprar', '/como-comprar', 'Cómo comprar'],
+  ['nosotros', '/nosotros', 'Nosotros'],
+  ['contacto', '/contacto', 'Contacto'],
+];
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a href="/" class="logo-link" aria-label="DIPA, ir al inicio"><Logo variant="sm" tone="dark" /></a>
+    <nav class="nav-desk" aria-label="Menú principal">
+      {links.map(([key, href, label]) => (
+        <a class:list={['nav-link', { 'nav-active': key === current }]} href={href} aria-current={key === current ? 'page' : undefined}>{label}</a>
+      ))}
+    </nav>
+    <div class="head-actions">
+      <a class="iconbtn" href={instagramUrl} aria-label={`Instagram de DIPA (@${site.instagramUser})`}><Icon name="instagram" /></a>
+      {headCta && <a class="btn btn-primary btn-sm head-cta" href={wa(MSG_GENERAL)}>Consultá</a>}
+      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu-movil" data-menu-btn>
+        <Icon name="menu" size={20} stroke={2.2} /><span data-menu-label>Menú</span>
+      </button>
+    </div>
+  </div>
+  <nav id="menu-movil" class="menu-panel" aria-label="Menú principal (móvil)" hidden>
+    {links.map(([key, href, label]) => (
+      <a class="menu-link" href={href} aria-current={key === current ? 'page' : undefined}>{label}</a>
+    ))}
+    <a class="btn btn-primary" href={wa(MSG_GENERAL)}>Consultá por WhatsApp</a>
+  </nav>
+</header>
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
+  const panel = document.getElementById('menu-movil');
+  const label = btn?.querySelector('[data-menu-label]');
+  if (btn && panel && label) {
+    const set = (open: boolean) => {
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      label.textContent = open ? 'Cerrar' : 'Menú';
+    };
+    btn.addEventListener('click', () => set(panel.hidden));
+    panel.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) set(false); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); }
+    });
+  }
+</script>

@@ -1,0 +1,11 @@
+---
+// The one place the logo is defined. Swap the files in public/logo/ to change it site-wide.
+interface Props { variant?: 'sm' | 'md' | 'lg' | 'xl'; tone?: 'dark' | 'light' }
+const { variant = 'md', tone = 'dark' } = Astro.props;
+const heights = { sm: 44, md: 64, lg: 112, xl: 170 };
+const src = tone === 'light' ? '/logo/dipa-logo-pie.svg' : '/logo/dipa-logo.svg';
+const h = heights[variant];
+// SVG viewBox is 190 x 99
+const w = Math.round((h * 190) / 99);
+---
+<img src={src} alt="DIPA Gráfica" width={w} height={h} style={`height:${h}px;width:auto;display:block;align-self:flex-start`} />

@@ -1,0 +1,86 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+import Photo from '../../../components/Photo.astro';
+import { getCollection } from 'astro:content';
+import { getCategories, getProducts } from '../../../lib/catalog';
+import { wa, productMessage } from '../../../lib/site';
+
+export async function getStaticPaths() {
+  const products = (await getProducts()).filter((p) => p.data.hasPage);
+  return products.map((product) => ({ params: { category: product.data.category.id, product: product.id }, props: { product } }));
+}
+const { product } = Astro.props;
+const p = product.data;
+const category = (await getCategories()).find((c) => c.id === p.category.id)!;
+const message = productMessage(p);
+const gallery = p.gallery.length ? p.gallery : [{ label: p.photoLabel || `Foto: ${p.title.toLowerCase()}`, image: p.image }];
+const allProducts = await getCollection('products');
+const related = p.related
+  .map((r) => allProducts.find((x) => x.id === r.id))
+  .filter((x): x is NonNullable<typeof x> => !!x && !x.data.hidden);
+---
+<Base title={`${p.title} · DIPA`} current="catalogo" waMessage={message} description={p.description || p.summary}>
+  <div class="wrap main-pad main-pad-crumbs">
+    <nav class="crumbs" aria-label="Estás en">
+      <a href="/catalogo">Catálogo</a><span aria-hidden="true">/</span><a href={`/catalogo/${category.id}`}>{category.data.title}</a><span aria-hidden="true">/</span><span aria-current="page">{p.title}</span>
+    </nav>
+
+    <div class="product-grid">
+      <div class="stack" style="gap:10px" data-gallery>
+        {gallery.map((g, i) => (
+          <div data-slide hidden={i !== 0}>
+            <Photo image={g.image} label={g.label} class="gallery-main ph-paper" icon iconSize={32} />
+          </div>
+        ))}
+        {gallery.length > 1 && (
+          <div class="thumbs">
+            {gallery.map((g, i) => (
+              <button type="button" class="thumb" aria-label={`Ver ${g.label}`} aria-pressed={i === 0 ? 'true' : 'false'} data-thumb={i}>
+                {g.image ? <img src={g.image} alt="" /> : `Foto ${i + 1}`}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <span class="badge self-start">{p.badge || category.data.title}</span>
+        <h1 style="font-size:34px;color:var(--c-terracotta)">{p.title}</h1>
+        {(p.description || p.summary) && <p style="font-size:17px">{p.description || p.summary}</p>}
+        {p.options.length > 0 && (
+          <dl class="opts">
+            {p.options.map((o) => <div class="opt"><dt>{o.label}</dt><dd>{o.value}</dd></div>)}
+          </dl>
+        )}
+        <a class="btn btn-primary btn-lg btn-block" href={wa(message)}><Icon name="chat" />Consultá por WhatsApp</a>
+        <p style="font-size:14px;text-align:center">Te pasamos el presupuesto por WhatsApp. Para confirmar se pide una seña del 50%. <a href="/como-comprar" style="font-weight:700">Ver cómo comprar</a></p>
+      </div>
+    </div>
+
+    {related.length > 0 && (
+      <section class="stack" style="gap:16px">
+        <h2 style="font-size:24px">También te puede interesar</h2>
+        <div class="grid-small">
+          {related.map((r) => (
+            <a class="card-link tile" href={r.data.hasPage ? `/catalogo/${r.data.category.id}/${r.id}` : `/catalogo/${r.data.category.id}`}>
+              <Photo image={r.data.image} label={r.data.photoLabel || `Foto: ${r.data.title.toLowerCase()}`} />
+              <h3>{r.data.title}</h3>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</Base>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((root) => {
+    const slides = root.querySelectorAll<HTMLElement>('[data-slide]');
+    const thumbs = root.querySelectorAll<HTMLButtonElement>('[data-thumb]');
+    thumbs.forEach((t) => t.addEventListener('click', () => {
+      const i = Number(t.dataset.thumb);
+      slides.forEach((s, j) => { s.hidden = j !== i; });
+      thumbs.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+    }));
+  });
+</script>

@@ -1,0 +1,21 @@
+{
+  "hidden": false,
+  "title": "Impresiones full color",
+  "order": 8,
+  "summary": "Imprimimos tus archivos en distintos papeles y tamaños.",
+  "photoLabel": "Foto: impresiones full color",
+  "note": "Solo impresión",
+  "intro": "Solo impresión, tal como envíes el archivo.",
+  "papers": [
+    "[PAPEL 1]",
+    "[PAPEL 2]",
+    "[PAPEL 3]",
+    "[PAPEL 4]"
+  ],
+  "sizes": [
+    "[TAMAÑO 1]",
+    "[TAMAÑO 2]",
+    "[TAMAÑO 3]",
+    "[TAMAÑO 4]"
+  ]
+}

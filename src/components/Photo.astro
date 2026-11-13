@@ -1,0 +1,10 @@
+---
+// Shows the real photo when there is one; otherwise the labelled placeholder box from the design.
+interface Props { image?: string; label?: string; class?: string; style?: string; icon?: boolean; iconSize?: number }
+const { image, label = '', class: cls = '', style, icon = false, iconSize = 28 } = Astro.props;
+import Icon from './Icon.astro';
+const alt = label.replace(/^Foto( \d+)?: /, '');
+---
+{image
+  ? <img class={`photo ${cls}`} style={style} src={image} alt={alt} loading="lazy" />
+  : <div class={`ph ${cls}`} style={style}>{icon && <Icon name="image" size={iconSize} stroke={1.8} />}{label}</div>}
