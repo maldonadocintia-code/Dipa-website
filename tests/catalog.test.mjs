@@ -47,3 +47,18 @@ test('drops related products that no longer exist and empty optional fields', ()
   assert.equal(q.badge, undefined);
   assert.equal(out.categories[0].combo, undefined);
 });
+
+test('home page: rejects an empty hero title and a card pointing to a missing category', () => {
+  const c = catalog();
+  c.home.hero.title = '  ';
+  assert.throws(() => validateCatalog(c), /portada/);
+  const d = catalog();
+  d.home.audiences.cards[0].category = 'no-existe';
+  assert.throws(() => validateCatalog(d), /categoría/);
+});
+
+test('home page: WhatsApp messages must start with "Hola DIPA!"', () => {
+  const c = catalog();
+  c.home.notFound.message = 'Hola, busco algo';
+  assert.throws(() => validateCatalog(c), /Hola DIPA!/);
+});

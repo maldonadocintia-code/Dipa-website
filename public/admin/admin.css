@@ -91,3 +91,5 @@ textarea { min-height: 88px; resize: vertical; }
   .row { flex-wrap: wrap; }
   .row-actions { width: 100%; justify-content: flex-end; }
 }
+.stack-fields { display: flex; flex-direction: column; gap: 8px; }
+.card > .section > h2 { margin-top: 4px; }

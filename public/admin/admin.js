@@ -324,13 +324,14 @@
       return;
     }
 
-    var tabs = [['products', 'Productos'], ['categories', 'Categorías'], ['site', 'Datos del local']];
+    var tabs = [['products', 'Productos'], ['categories', 'Categorías'], ['home', 'Inicio'], ['site', 'Datos del local']];
     app.appendChild(h('div', { class: 'tabs', role: 'tablist' }, tabs.map(function (t) {
       return h('button', { type: 'button', class: 'tab', role: 'tab', 'aria-selected': String(state.tab === t[0]), text: t[1], onclick: function () { state.tab = t[0]; renderApp(); } });
     })));
 
     if (state.tab === 'products') app.appendChild(productList());
     else if (state.tab === 'categories') app.appendChild(categoryList());
+    else if (state.tab === 'home') app.appendChild(homeForm());
     else app.appendChild(siteForm());
   }
 
@@ -572,6 +573,9 @@
       h('div', { class: 'editor-actions section' },
         h('button', { type: 'button', class: 'btn btn-ghost', text: 'Listo', onclick: function () { state.editing = null; renderApp(); } }),
         h('button', { type: 'button', class: 'btn btn-danger', text: 'Borrar categoría', onclick: function () {
+          var home = cat.home;
+          var usedOnHome = home && (home.audiences.cards.some(function (x) { return x.category === c.id; }) || home.featured.cards.some(function (x) { return x.category === c.id; }));
+          if (usedOnHome) { alert('La página de inicio tiene una tarjeta que lleva a esta categoría. Cambiala primero en la pestaña "Inicio".'); return; }
           if (count) { alert('Esta categoría tiene ' + count + ' productos. Pasalos a otra categoría o borralos primero. Si solo querés sacarla un tiempo, usá "Ocultar del sitio".'); return; }
           if (!confirm('¿Borrar la categoría "' + c.title + '"?')) return;
           cat.categories.splice(cat.categories.indexOf(c), 1);
@@ -579,6 +583,105 @@
           markDirty();
           renderApp();
         } })));
+  }
+
+  // ---------- home page ----------
+  function categoryOptions() {
+    return state.catalog.categories.map(function (c) { return { value: c.id, label: c.title }; });
+  }
+
+  /** Featured-card button: goes to a category or opens WhatsApp with a message. */
+  function featuredLink(card) {
+    var wrap = h('div', { class: 'stack-fields' });
+    var WA = '__whatsapp';
+    function draw() {
+      wrap.textContent = '';
+      var id = nextId();
+      var sel = h('select', { id: id, onchange: function () {
+        if (sel.value === WA) { delete card.category; card.message = card.message || 'Hola DIPA! Quiero consultar por '; }
+        else { card.category = sel.value; delete card.message; }
+        markDirty();
+        draw();
+      } },
+        h('option', { value: WA, text: 'Abre WhatsApp con un mensaje' }),
+        state.catalog.categories.map(function (c) { return h('option', { value: c.id, text: 'Categoría: ' + c.title }); }));
+      sel.value = card.category || WA;
+      append(wrap, [
+        h('div', { class: 'field' }, h('label', { for: id, text: 'El botón lleva a' }), sel),
+        !card.category && textField('Mensaje de WhatsApp', card, 'message', { hint: 'Tiene que empezar con "Hola DIPA!".' }),
+      ]);
+    }
+    draw();
+    return wrap;
+  }
+
+  function homeForm() {
+    var home = state.catalog.home;
+    if (!home) return h('section', { class: 'card' }, h('p', { text: 'Todavía no hay datos de la página de inicio. Recargá la página.' }));
+    var group = function (title, hint) { return [h('h2', { text: title }), hint && h('p', { class: 'hint', text: hint })]; };
+    var box = h('section', { class: 'card' },
+      h('h1', { text: 'Página de inicio' }),
+      h('p', { class: 'hint', text: 'Cambiá los textos y las fotos. El diseño queda igual.' }));
+
+    append(box, h('div', { class: 'section' },
+      group('Portada', 'Lo primero que se ve, al lado del logo.'),
+      textField('Título', home.hero, 'title'),
+      textField('Texto', home.hero, 'text', { multiline: true }),
+      textField('Etiqueta sobre la foto', home.hero, 'badge', { hint: 'Opcional. Ej.: "Listo en aprox. 5 días hábiles".' }),
+      imageField('Foto principal', home.hero, 'image', home.hero.photoLabel || 'Sin foto'),
+      textField('Texto del recuadro sin foto', home.hero, 'photoLabel'),
+      imageField('Foto chica (solo en computadora)', home.hero, 'smallImage', home.hero.smallPhotoLabel || 'Sin foto'),
+      textField('Texto de la foto chica sin foto', home.hero, 'smallPhotoLabel', { hint: 'Si dejás vacíos la foto chica y este texto, no se muestra.' })));
+
+    append(box, h('div', { class: 'section' },
+      group('"¿No encontrás lo que buscás?"'),
+      textField('Título', home.notFound, 'title'),
+      textField('Texto', home.notFound, 'text'),
+      textField('Mensaje de WhatsApp', home.notFound, 'message', { hint: 'Tiene que empezar con "Hola DIPA!".' })));
+
+    append(box, h('div', { class: 'section' },
+      group('"Para quién es"', 'Tarjetas que llevan a una categoría. Tres quedan mejor.'),
+      textField('Frase a mano', home.audiences, 'kicker'),
+      textField('Título', home.audiences, 'title'),
+      subList('Tarjetas', '', home.audiences.cards, function () {
+        return { title: '', text: '', linkLabel: 'Ver más', category: state.catalog.categories[0].id };
+      }, function (c) {
+        return [textField('Título', c, 'title'), textField('Texto', c, 'text', { multiline: true }),
+          selectField('Lleva a la categoría', c, 'category', categoryOptions()),
+          textField('Texto del enlace', c, 'linkLabel', { hint: 'Ej.: "Ver escolares".' }),
+          imageField('Foto', c, 'image', c.photoLabel || 'Sin foto'), textField('Texto del recuadro sin foto', c, 'photoLabel')];
+      }, 'Agregar tarjeta')));
+
+    append(box, h('div', { class: 'section' },
+      group('Destacados', 'Tarjetas grandes con etiquetas y botón. Dos quedan mejor.'),
+      textField('Frase a mano', home.featured, 'kicker'),
+      textField('Título', home.featured, 'title'),
+      subList('Tarjetas', '', home.featured.cards, function () {
+        return { badge: '', title: '', text: '', tags: [], buttonLabel: 'Ver productos', category: state.catalog.categories[0].id };
+      }, function (c) {
+        return [textField('Etiqueta', c, 'badge'), textField('Título', c, 'title'), textField('Texto', c, 'text', { multiline: true }),
+          listField('Etiquetas verdes', c, 'tags', 'Una por renglón. Ej.: Tarjetas personales.'),
+          textField('Texto del botón', c, 'buttonLabel'), featuredLink(c),
+          imageField('Foto', c, 'image', c.photoLabel || 'Sin foto'), textField('Texto del recuadro sin foto', c, 'photoLabel')];
+      }, 'Agregar tarjeta')));
+
+    append(box, h('div', { class: 'section' },
+      group('Instagram', 'El usuario de Instagram se cambia en "Datos del local".'),
+      textField('Título', home.instagram, 'title'),
+      textField('Texto antes del @usuario', home.instagram, 'text'),
+      subList('Fotos', 'Seis quedan mejor. Las fotos no se actualizan solas desde Instagram: subilas acá.', home.instagram.photos, function () {
+        return { label: 'Post de Instagram' };
+      }, function (ph) {
+        return [imageField('Foto', ph, 'image', ph.label), textField('Descripción', ph, 'label')];
+      }, 'Agregar foto')));
+
+    append(box, h('div', { class: 'section' },
+      group('Banda final', '"¿Tenés una idea? Contanos."'),
+      checkField('Mostrar la banda final', home.closing, 'show'),
+      textField('Título', home.closing, 'title'),
+      textField('Texto', home.closing, 'text', { multiline: true }),
+      textField('Mensaje de WhatsApp', home.closing, 'message', { hint: 'Tiene que empezar con "Hola DIPA!".' })));
+    return box;
   }
 
   // ---------- site details ----------

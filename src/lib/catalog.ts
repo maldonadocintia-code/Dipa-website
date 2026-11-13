@@ -13,7 +13,16 @@ export interface Product {
   summary?: string; image?: string; photoLabel?: string; whatsappName?: string; badge?: string; description?: string;
   options?: { label: string; value: string }[]; gallery?: { label: string; image?: string }[]; related?: string[];
 }
-export interface Catalog { site: Site; categories: Category[]; products: Product[] }
+type Photo = { image?: string; photoLabel?: string };
+export interface Home {
+  hero: { title: string; text: string; badge?: string; image?: string; photoLabel?: string; smallImage?: string; smallPhotoLabel?: string };
+  notFound: { title: string; text: string; message: string };
+  audiences: { kicker?: string; title: string; cards: (Photo & { title: string; text?: string; linkLabel: string; category: string })[] };
+  featured: { kicker?: string; title: string; cards: (Photo & { badge?: string; title: string; text?: string; tags?: string[]; buttonLabel: string; category?: string; message?: string })[] };
+  instagram: { title: string; text: string; photos: { image?: string; label: string }[] };
+  closing: { show: boolean; title?: string; text?: string; message?: string };
+}
+export interface Catalog { site: Site; categories: Category[]; products: Product[]; home?: Home }
 
 // Throws at build time if catalog.json is malformed.
 export const catalog: Catalog = validateCatalog(raw);
