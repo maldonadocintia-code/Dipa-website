@@ -1,0 +1,18 @@
+---
+import Photo from './Photo.astro';
+import { wa, productMessage } from '../lib/site';
+import { productUrl, photoLabel, type Product } from '../lib/catalog';
+interface Props { product: Product }
+const { product: p } = Astro.props;
+---
+<article class:list={['tile', 'tile-product', { 'tile-featured': p.featured }]}>
+  {p.featured && <span class="badge">Destacado</span>}
+  <Photo image={p.image} label={photoLabel(p)} />
+  <div class="tile-body">
+    <h2>{p.title}</h2>
+    {p.summary && <p>{p.summary}</p>}
+  </div>
+  {p.hasPage
+    ? <a class="btn btn-primary btn-sm" href={productUrl(p)}>Ver producto</a>
+    : <a class="btn btn-ghost btn-sm" href={wa(productMessage(p))} aria-label={`Consultá por ${p.title} por WhatsApp`}>Consultá</a>}
+</article>

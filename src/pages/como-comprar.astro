@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { wa, MSG_GENERAL, site } from '../lib/site';
+// Owner's legal and commercial wording: keep word for word.
+---
+<Base title="Cómo comprar · DIPA" current="como-comprar" description="Pedir es fácil: todo se coordina por WhatsApp. Seña del 50%, retiro en el local.">
+  <div class="wrap main-pad" style="max-width:760px">
+    <div class="page-head">
+      <span class="kicker">Paso a paso</span>
+      <h1>Cómo comprar</h1>
+      <p>Pedir es fácil: todo se coordina por WhatsApp.</p>
+    </div>
+
+    <ol class="steps">
+      <li class="step"><span class="num" aria-hidden="true">1</span><div class="step-body"><h2>Consultá por WhatsApp.</h2><p>Contanos qué necesitás y te pasamos el presupuesto.</p><a href={wa(MSG_GENERAL)} style="font-weight:700">Escribinos al {site.whatsappDisplay}</a></div></li>
+      <li class="step"><span class="num" aria-hidden="true">2</span><div class="step-body"><h2>Confirmás el pedido con una seña del 50%.</h2></div></li>
+      <li class="step"><span class="num" aria-hidden="true">3</span><div class="step-body"><h2>Medios de pago</h2><p>Efectivo, transferencia o Mercado Pago.</p></div></li>
+      <li class="step"><span class="num" aria-hidden="true">4</span><div class="step-body"><h2>Plazo de entrega</h2><p>Aproximadamente 5 días hábiles.</p></div></li>
+      <li class="step"><span class="num" aria-hidden="true">5</span><div class="step-body"><h2>Entrega</h2><p>Retiro en el local. Envío a domicilio a coordinar: las opciones y el costo se acuerdan por WhatsApp al hacer el pedido.</p></div></li>
+    </ol>
+
+    <section class="sage-block" style="gap:14px">
+      <h2 style="font-size:24px">Condiciones</h2>
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px">
+        <li>Para confirmar el pedido se pide una seña del 50%. El saldo se abona al retirar o antes del envío.</li>
+        <li>Los productos son personalizados, así que la seña no se reintegra si el pedido se cancela una vez empezado o si no se retira.</li>
+        <li>Precios sujetos a modificación sin previo aviso.</li>
+      </ul>
+    </section>
+
+    <CtaBand title="¿Listo para pedir?" text="Escribinos y arrancamos con tu presupuesto." message="Hola DIPA! Quiero hacer un pedido" />
+  </div>
+</Base>

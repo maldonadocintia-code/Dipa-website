@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Logo DIPA Gráfica</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>body{margin:0}</style>
+</helmet>
+<div style="display: inline-flex; line-height: 0; font-family: 'DM Sans', system-ui, sans-serif; color: #4F2C1D">
+<sc-if value="{{isLight}}" hint-placeholder-val="{{ false }}">
+<img src="/_blob/35092fa8905c9d1874d0744ba58de964" alt="DIPA Gráfica" style="height: {{h}}; width: auto; display: block">
+</sc-if>
+<sc-if value="{{isDark}}" hint-placeholder-val="{{ true }}">
+<img src="/_blob/f814b552c3b19c361e9d121951098f05" alt="DIPA Gráfica" style="height: {{h}}; width: auto; display: block">
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"variant":{"editor":"enum","options":["sm","md","lg","xl"],"default":"md"},"tone":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":240,"height":120}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var heights = { sm: 44, md: 64, lg: 112, xl: 170 };
+    var h = heights[this.props.variant] || heights.md;
+    var light = this.props.tone === 'light';
+    return { h: h + 'px', isLight: light, isDark: !light };
+  }
+}
+</script>
+</body>
+</html>

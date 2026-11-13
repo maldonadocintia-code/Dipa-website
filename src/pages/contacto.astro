@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { wa, MSG_GENERAL, instagramUrl, site } from '../lib/site';
+---
+<Base title="Contacto · DIPA" current="contacto" description={`WhatsApp ${site.whatsappDisplay} · Instagram @${site.instagramUser} · ${site.hours} · ${site.area}`}>
+  <div class="wrap main-pad" style="max-width:900px;gap:24px">
+    <div class="page-head">
+      <span class="kicker">Hablemos</span>
+      <h1>Contacto</h1>
+      <p>Escribinos por WhatsApp y te respondemos en nuestro horario de atención.</p>
+    </div>
+
+    <div class="cgrid">
+      <div class="ccard">
+        <span class="cic" aria-hidden="true"><Icon name="chat" /></span>
+        <div class="stack" style="gap:4px"><span class="clabel">WhatsApp</span><a class="cbig" href={wa()}>{site.whatsappDisplay}</a></div>
+      </div>
+      <div class="ccard">
+        <span class="cic" aria-hidden="true"><Icon name="instagram" /></span>
+        <div class="stack" style="gap:4px"><span class="clabel">Instagram</span><a class="cbig" href={instagramUrl}>@{site.instagramUser}</a></div>
+      </div>
+      <div class="ccard">
+        <span class="cic" aria-hidden="true"><Icon name="clock" /></span>
+        <div class="stack" style="gap:4px"><span class="clabel">Horario</span><p class="cmid">{site.hours}</p></div>
+      </div>
+      <div class="ccard">
+        <span class="cic" aria-hidden="true"><Icon name="pin" /></span>
+        <div class="stack" style="gap:4px"><span class="clabel">Dónde estamos</span><p class="cmid">{site.area}</p><p style="font-size:14px">{site.address} · Retiro en el local</p></div>
+      </div>
+    </div>
+
+    <div class="ph" style="aspect-ratio:16 / 10;width:100%;border-radius:var(--r-lg)">Mapa: ubicación del local</div>
+
+    <a class="btn btn-primary self-start" href={wa(MSG_GENERAL)}><Icon name="chat" size={22} />Consultá por WhatsApp</a>
+  </div>
+</Base>
+<style>
+  .cgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+</style>

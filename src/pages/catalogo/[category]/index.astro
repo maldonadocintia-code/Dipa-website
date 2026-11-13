@@ -1,0 +1,51 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProductTile from '../../../components/ProductTile.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { getCategories, getProducts } from '../../../lib/catalog';
+import { MSG_GENERAL } from '../../../lib/site';
+
+export function getStaticPaths() {
+  return getCategories().map((c) => ({ params: { category: c.id }, props: { c } }));
+}
+const { c } = Astro.props;
+const products = getProducts(c.id);
+const intro = c.intro || c.summary;
+---
+<Base title={`${c.title} · Catálogo · DIPA`} current="catalogo" description={intro}>
+  <div class="wrap main-pad main-pad-crumbs" style="gap:24px">
+    <nav class="crumbs" aria-label="Estás en">
+      <a href="/catalogo">Catálogo</a><span aria-hidden="true">/</span><span aria-current="page">{c.title}</span>
+    </nav>
+
+    <div class="sage-block">
+      {c.kicker && <span class="kicker kicker-brown">{c.kicker}</span>}
+      <h1 style="font-size:32px">{c.title}</h1>
+      {intro && <p>{intro}</p>}
+      {c.note && c.note !== intro && <span class="tag self-start">{c.note}</span>}
+    </div>
+
+    {products.length > 0 && (
+      <div class="grid-small">
+        {products.map((p) => <ProductTile product={p} />)}
+      </div>
+    )}
+
+    {(c.papers?.length || c.sizes?.length) ? (
+      <section class="sage-block" style="gap:16px">
+        <h2 style="font-size:24px">Papeles y tamaños</h2>
+        <div class="print-grid">
+          {c.papers?.length ? <div class="stack" style="gap:8px"><h3 class="plain-list-h">Tipos de papel</h3><ul class="plain-list">{c.papers.map((x) => <li>{x}</li>)}</ul></div> : null}
+          {c.sizes?.length ? <div class="stack" style="gap:8px"><h3 class="plain-list-h">Tamaños</h3><ul class="plain-list">{c.sizes.map((x) => <li>{x}</li>)}</ul></div> : null}
+        </div>
+      </section>
+    ) : null}
+
+    {c.combo
+      ? <CtaBand title={c.combo.title} text={c.combo.text} message={c.combo.message} />
+      : <CtaBand title="¿No encontrás lo que buscás?" text="Escribinos: hacemos muchos trabajos a medida." message={MSG_GENERAL} />}
+  </div>
+</Base>
+<style>
+  .print-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+</style>

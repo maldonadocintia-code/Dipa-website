@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>DIPA · Colores y tipografías</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;display=swap">
+<style>
+body{margin:0}
+.sw{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid rgba(79,44,29,0.15);background:#FFFDF4}
+.chip{height:84px;display:flex;align-items:flex-end;padding:10px 12px;box-sizing:border-box;font-weight:700;font-size:15px}
+.meta{padding:10px 12px;display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.35}
+.meta b{font-size:14px}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:12px}
+</style>
+</helmet>
+<div style="width: 900px; height: 1120px; box-sizing: border-box; padding: 48px; background: #F7F4D3; color: #4F2C1D; font-family: 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 32px">
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 40px; font-weight: 600; color: #A44B3F">Colores y tipografías</h1>
+<p style="margin: 0">Variables (tokens) al principio de cada página: cambiá el valor y cambia en todo el diseño.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px">
+<div class="sw"><div class="chip" style="background: #A44B3F; color: #FFFFFF">Aa</div><div class="meta"><b>Terracota</b><span class="code">--c-terracotta #A44B3F</span><span>Marca, botones, títulos</span></div></div>
+<div class="sw"><div class="chip" style="background: #F09C78; color: #4F2C1D">Aa</div><div class="meta"><b>Durazno</b><span class="code">--c-peach #F09C78</span><span>Acentos, badges</span></div></div>
+<div class="sw"><div class="chip" style="background: #CBDFBC; color: #4F2C1D">Aa</div><div class="meta"><b>Salvia</b><span class="code">--c-sage #CBDFBC</span><span>Fondos de sección</span></div></div>
+<div class="sw"><div class="chip" style="background: #F7F4D3; color: #4F2C1D">Aa</div><div class="meta"><b>Crema</b><span class="code">--c-cream #F7F4D3</span><span>Fondo principal</span></div></div>
+<div class="sw"><div class="chip" style="background: #D5E09C; color: #4F2C1D">Aa</div><div class="meta"><b>Verde claro</b><span class="code">--c-lightgreen #D5E09C</span><span>Tags, acentos</span></div></div>
+<div class="sw"><div class="chip" style="background: #9AAE88; color: #4F2C1D">Aa</div><div class="meta"><b>Salvia oscuro</b><span class="code">--c-mutedsage #9AAE88</span><span>Bordes, íconos</span></div></div>
+<div class="sw"><div class="chip" style="background: #5E6B4F; color: #FFFFFF">Aa</div><div class="meta"><b>Oliva</b><span class="code">--c-olive #5E6B4F</span><span>Botón secundario, pie</span></div></div>
+<div class="sw"><div class="chip" style="background: #E39260; color: #4F2C1D">Aa</div><div class="meta"><b>Naranja</b><span class="code">--c-burnt #E39260</span><span>Detalles, foco</span></div></div>
+<div class="sw"><div class="chip" style="background: #4F2C1D; color: #FFFFFF">Aa</div><div class="meta"><b>Marrón</b><span class="code">--c-brown #4F2C1D</span><span>Texto</span></div></div>
+<div class="sw"><div class="chip" style="background: #FFFDF4; color: #4F2C1D">Aa</div><div class="meta"><b>Papel</b><span class="code">--c-paper #FFFDF4</span><span>Tarjetas</span></div></div>
+</div>
+
+<p style="margin: 0; font-size: 14px; background: #CBDFBC; border-radius: 12px; padding: 12px 16px">Regla: texto blanco solo sobre terracota, oliva o marrón. Sobre los demás colores, texto marrón.</p>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+<div style="background: #FFFDF4; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 8px; border: 1px solid rgba(79,44,29,0.15)">
+<span class="code">--f-display</span>
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; color: #A44B3F; line-height: 1.1">Fraunces</span>
+<span style="font-size: 13px">Títulos</span>
+</div>
+<div style="background: #FFFDF4; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 8px; border: 1px solid rgba(79,44,29,0.15)">
+<span class="code">--f-body</span>
+<span style="font-size: 30px; font-weight: 500; line-height: 1.1">DM Sans</span>
+<span style="font-size: 13px">Textos y botones</span>
+</div>
+<div style="background: #FFFDF4; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 8px; border: 1px solid rgba(79,44,29,0.15)">
+<span class="code">--f-hand</span>
+<span style="font-family: 'Caveat', cursive; font-size: 38px; font-weight: 600; color: #A44B3F; line-height: 1">Caveat</span>
+<span style="font-size: 13px">Detalles a mano</span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+<div style="background: #FFFDF4; border-radius: 16px; height: 190px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid rgba(79,44,29,0.15)">
+<dc-import name="Logo" variant="lg" tone="dark" hint-size="215px,112px"></dc-import>
+<span style="font-size: 13px">Logo sobre fondos claros</span>
+</div>
+<div style="background: #5E6B4F; border-radius: 16px; height: 190px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px">
+<dc-import name="Logo" variant="lg" tone="light" hint-size="215px,112px"></dc-import>
+<span style="font-size: 13px; color: #FFFFFF">Versión blanca para el pie</span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":900,"height":1120}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

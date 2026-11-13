@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/Photo.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getCategories, photoLabel } from '../../lib/catalog';
+import { MSG_GENERAL } from '../../lib/site';
+const categories = getCategories();
+const prints = categories.find((c) => c.papers?.length || c.sizes?.length);
+---
+<Base title="Catálogo · DIPA" current="catalogo" description="Escolares, agendas, emprendimientos, cumples, fechas especiales, calendarios, cartelería e impresiones. Todo a pedido.">
+  <div class="wrap main-pad">
+    <div class="page-head">
+      <span class="kicker">Todo a pedido</span>
+      <h1>Catálogo</h1>
+      <p>Elegí una categoría y mirá lo que hacemos. Todo es personalizado: consultá por WhatsApp y te pasamos el presupuesto.</p>
+    </div>
+
+    <div class="grid-small">
+      {categories.map((c) => (
+        <a class="card-link tile" href={`/catalogo/${c.id}`}>
+          <Photo image={c.image} label={photoLabel(c)} />
+          <div class="tile-body" style={c.note ? 'gap:6px' : undefined}>
+            <h2>{c.title}</h2>
+            {c.summary && <p>{c.summary}</p>}
+            {c.note && <span class="tag">{c.note}</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {prints && (
+      <section id="impresiones" class="sage-block" style="gap:16px">
+        <div class="stack-6">
+          <h2 style="font-size:24px">{prints.title}</h2>
+          {prints.intro && <p style="font-weight:500">{prints.intro}</p>}
+        </div>
+        <div class="print-grid">
+          {prints.papers?.length ? (
+            <div class="stack" style="gap:8px">
+              <h3 class="plain-list-h">Tipos de papel</h3>
+              <ul class="plain-list">{prints.papers.map((x) => <li>{x}</li>)}</ul>
+            </div>
+          ) : null}
+          {prints.sizes?.length ? (
+            <div class="stack" style="gap:8px">
+              <h3 class="plain-list-h">Tamaños</h3>
+              <ul class="plain-list">{prints.sizes.map((x) => <li>{x}</li>)}</ul>
+            </div>
+          ) : null}
+        </div>
+      </section>
+    )}
+
+    <CtaBand title="¿No encontrás lo que buscás?" text="Escribinos: hacemos muchos trabajos a medida." message={MSG_GENERAL} />
+  </div>
+</Base>
+<style>
+  .print-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+</style>

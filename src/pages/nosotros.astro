@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { wa, MSG_GENERAL } from '../lib/site';
+---
+<Base title="Nosotros · DIPA" current="nosotros">
+  <div class="wrap main-pad" style="max-width:900px">
+    <div class="page-head">
+      <span class="kicker">Hola, somos DIPA</span>
+      <h1>Nosotros</h1>
+    </div>
+
+    <div style="position:relative">
+      <div class="tape" aria-hidden="true" style="top:-12px;left:24px;width:90px;transform:rotate(-5deg)"></div>
+      <div class="ph ph-paper" style="aspect-ratio:4 / 3;width:100%;border-radius:var(--r-lg)"><Icon name="image" size={28} stroke={1.8} />Foto: el local y el equipo de DIPA</div>
+    </div>
+
+    <div class="stack" style="gap:14px">
+      <span class="badge self-start">Texto provisorio</span>
+      <p style="font-size:18px">Somos DIPA, una papelería personalizada en Pablo Podestá. Diseñamos e imprimimos etiquetas, agendas, tarjetería y deco para escuelas, familias, emprendedores y comercios.</p>
+      <p>[Contá acá la historia del local: cuándo empezó, quién lo lleva adelante y qué lo hace distinto.]</p>
+    </div>
+
+    <div class="vals">
+      <div class="val"><span class="val-ic" aria-hidden="true"><Icon name="pen" size={22} /></span>Todo personalizado</div>
+      <div class="val"><span class="val-ic" aria-hidden="true"><Icon name="chat" size={22} /></span>Atención por WhatsApp</div>
+      <div class="val"><span class="val-ic" aria-hidden="true"><Icon name="pin" size={22} /></span>Retiro en el local</div>
+    </div>
+
+    <div class="row-wrap">
+      <a class="btn btn-primary" href={wa(MSG_GENERAL)}>Consultá por WhatsApp</a>
+      <a class="btn btn-ghost" href="/catalogo">Ver catálogo</a>
+    </div>
+  </div>
+</Base>
+<style>
+  .vals { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+</style>
